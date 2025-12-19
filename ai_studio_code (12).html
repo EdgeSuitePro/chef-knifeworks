@@ -1,0 +1,137 @@
+<script>
+    // --- REAL DATABASE LAYER ---
+    // REPLACE THESE WITH YOUR KEYS FROM SUPABASE SETTINGS -> API
+    const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+    const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    
+    // Initialize Client
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('bladeFlowApp', () => ({
+            view: 'home',
+            bookingStep: 1,
+            currentUser: null,
+            allOrders: [], // This will now pull from Supabase
+            confirmedId: '',
+            loyaltyStats: { totalSharpened: 0, progress: 0 },
+            showCalendar: false,
+            
+            // Form Data
+            newOrder: { service: 'Standard', count: 3, date: '', timeSlot: '', name: '', email: '', phone: '' },
+            
+            // Static Data
+            timeSlots: ['9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM', '7:00 PM', '8:00 PM'],
+
+            get nextWeek() {
+                let dates = [];
+                for(let i=2; i<7; i++) {
+                    let d = new Date(); d.setDate(d.getDate() + i);
+                    dates.push(d.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'}));
+                }
+                return dates;
+            },
+
+            async initApp() {
+                // 1. Initialize Icons
+                setTimeout(() => lucide.createIcons(), 100);
+
+                // 2. Check for logged in user in LocalStorage (Simple Session)
+                const storedUser = localStorage.getItem('ckw_user_email');
+                if (storedUser) {
+                    this.currentUser = { email: storedUser, name: localStorage.getItem('ckw_user_name') };
+                    await this.fetchOrders();
+                }
+            },
+
+            async fetchOrders() {
+                if (!this.currentUser) return;
+
+                // REAL DATABASE CALL
+                const { data, error } = await supabase
+                    .from('bookings')
+                    .select('*')
+                    .eq('email', this.currentUser.email)
+                    .order('id', { ascending: false });
+
+                if (error) {
+                    console.error('Error fetching:', error);
+                } else {
+                    this.allOrders = data;
+                    // Calculate Loyalty based on real data
+                    let total = data.reduce((sum, order) => sum + (order.item_count || 0), 0);
+                    this.loyaltyStats.totalSharpened = total;
+                    this.loyaltyStats.progress = (total % 10) * 10;
+                }
+            },
+
+            get myOrders() {
+                return this.allOrders; // Already filtered by fetchOrders
+            },
+            
+            get activeOrder() {
+                return this.allOrders.length > 0 ? this.allOrders[0] : null;
+            },
+
+            // --- NAVIGATION & INPUTS ---
+            scrollTo(id) { this.view = 'home'; setTimeout(() => document.getElementById(id).scrollIntoView(), 100); },
+            
+            selectDate(sel) { 
+                if(sel === 'Today') this.newOrder.date = new Date().toLocaleDateString();
+                else if(sel === 'Tomorrow') { let d = new Date(); d.setDate(d.getDate() + 1); this.newOrder.date = d.toLocaleDateString(); }
+                else this.newOrder.date = sel;
+            },
+            
+            selectTime(t) { 
+                this.newOrder.timeSlot = t; 
+                this.bookingStep = 4; // Auto-Advance
+            },
+
+            async submitOrder() {
+                if (!this.newOrder.email || !this.newOrder.name) {
+                    alert("Please fill in your contact details.");
+                    return;
+                }
+                
+                this.confirmedId = 'CKW-' + Math.floor(1000 + Math.random() * 9000);
+
+                // 1. Prepare Data
+                const orderData = {
+                    reservation_id: this.confirmedId,
+                    name: this.newOrder.name,
+                    email: this.newOrder.email,
+                    phone: this.newOrder.phone,
+                    service_type: this.newOrder.service,
+                    item_count: parseInt(this.newOrder.count),
+                    booking_date: this.newOrder.date,
+                    booking_time: this.newOrder.timeSlot,
+                    status: 'Confirmed'
+                };
+
+                // 2. SEND TO SUPABASE
+                const { error } = await supabase.from('bookings').insert([orderData]);
+
+                if (error) {
+                    alert("Error saving reservation: " + error.message);
+                    return;
+                }
+
+                // 3. Update Local State
+                this.currentUser = { name: this.newOrder.name, email: this.newOrder.email };
+                localStorage.setItem('ckw_user_email', this.newOrder.email);
+                localStorage.setItem('ckw_user_name', this.newOrder.name);
+                
+                await this.fetchOrders(); // Refresh list from DB
+                this.bookingStep = 5;
+            },
+            
+            logout() { 
+                this.currentUser = null; 
+                this.allOrders = [];
+                localStorage.removeItem('ckw_user_email');
+                localStorage.removeItem('ckw_user_name');
+                this.view = 'home'; 
+            }
+        }))
+    })
+</script>
