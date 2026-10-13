@@ -3,172 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knife Knowledge Wiki | Chef Knife Works</title>
-    <meta name="description" content="Your complete guide to knife care, sharpening, and maintenance from Chef Knife Works — the experts at chefknifeworks.com.">
+    <title>Knife Knowledge Wiki | Chef KnifeWorks</title>
+    <meta name="description" content="Your complete guide to knife care, sharpening, and maintenance from Chef KnifeWorks — Maple Grove, Minnesota.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Della+Respira&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
+        /* ── Brand tokens ─────────────────────────────── */
+        :root {
+            --ckw-carbon:  #111111;
+            --ckw-bronze:  #C6925B;
+            --ckw-cream:   #FAF9F5;
+            --ckw-warm:    #fffdf8;
+            --ckw-ink-soft: rgba(17,17,17,.62);
+            --ckw-line:    rgba(17,17,17,.09);
+            --ckw-shadow:  0 24px 70px rgba(17,17,17,.10);
+            --ckw-header:  112px;
+        }
+        @media(max-width:640px) { :root { --ckw-header: 84px; } }
+
         [x-cloak] { display: none !important; }
 
         * { box-sizing: border-box; }
-        body { background: #080809; color: #f1f1f1; font-family: system-ui, -apple-system, sans-serif; }
 
-        .gold { color: #C9A84C; }
-        .btn-gold {
-            background: linear-gradient(135deg, #C9A84C 0%, #E8C870 100%);
-            color: #080809; font-weight: 700; border-radius: 10px;
-            transition: transform .15s, box-shadow .15s;
-            display: inline-block; text-align: center;
+        body {
+            background: radial-gradient(circle at 8% 0%, rgba(198,146,91,.10), transparent 28rem), var(--ckw-cream);
+            color: var(--ckw-carbon);
+            font-family: Montserrat, system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
         }
-        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,168,76,.4); }
 
-        .card {
-            background: #141418; border: 1px solid #242428; border-radius: 14px;
+        /* ── Typography ──────────────────────────────── */
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Della Respira', Georgia, serif;
+            font-weight: 400;
+        }
+
+        /* ── Nav ─────────────────────────────────────── */
+        .ckw-header {
+            height: var(--ckw-header);
+            background: rgba(12,13,12,.97);
+            border-bottom: 1px solid rgba(255,255,255,.1);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        .nav-link {
+            color: rgba(250,249,245,.65);
+            font-size: .62rem; font-weight: 700;
+            letter-spacing: .17em; text-transform: uppercase;
+            transition: color .16s ease;
+        }
+        .nav-link:hover { color: #faf9f5; }
+
+        /* ── Buttons ─────────────────────────────────── */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+            min-height: 3rem; padding: .72rem 1.35rem;
+            border-radius: 999px; border: 1px solid transparent;
+            font-family: Montserrat, sans-serif;
+            font-size: .75rem; font-weight: 700;
+            letter-spacing: .1em; text-transform: uppercase;
+            transition: transform .18s ease, background-color .18s ease, box-shadow .18s ease, border-color .18s ease;
+            cursor: pointer; white-space: nowrap; text-decoration: none;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .btn:disabled { opacity: .48; cursor: not-allowed; transform: none; }
+
+        .btn-bronze {
+            background: var(--ckw-bronze); color: #fff;
+            box-shadow: 0 10px 28px rgba(159,84,56,.22);
+        }
+        .btn-bronze:hover { background: #b8824e; }
+
+        .btn-dark {
+            background: var(--ckw-carbon); color: var(--ckw-cream);
+        }
+        .btn-dark:hover { background: #2a2a2a; }
+
+        .btn-outline {
+            border-color: rgba(17,17,17,.3); background: transparent; color: var(--ckw-carbon);
+        }
+        .btn-outline:hover { border-color: var(--ckw-bronze); }
+
+        .btn-outline-cream {
+            border-color: rgba(250,249,245,.5); color: #faf9f5; background: transparent;
+        }
+        .btn-outline-cream:hover { border-color: var(--ckw-bronze); }
+
+        /* ── Cards / Surfaces ────────────────────────── */
+        .surface {
+            background: rgba(255,253,248,.86);
+            border: 1px solid var(--ckw-line);
+            border-radius: 1.35rem;
+            box-shadow: 0 16px 50px rgba(17,17,17,.07);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .surface-dark {
+            background: linear-gradient(155deg, #2a2d2b, #1b1e1c 58%, #151716);
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 1.35rem;
+            color: var(--ckw-cream);
+            box-shadow: var(--ckw-shadow);
+        }
+        .surface-hover {
+            transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+            cursor: pointer;
+        }
+        .surface-hover:hover {
+            transform: translateY(-3px);
+            border-color: rgba(198,146,91,.45);
+            box-shadow: 0 20px 56px rgba(17,17,17,.11);
+        }
+
+        /* ── Category chips ──────────────────────────── */
+        .cat-chip {
+            background: rgba(255,253,248,.86);
+            border: 1.5px solid var(--ckw-line);
+            border-radius: 1.35rem;
+            cursor: pointer;
             transition: border-color .2s, transform .2s, box-shadow .2s;
         }
-        .card-hover:hover {
-            border-color: rgba(201,168,76,.5); transform: translateY(-3px);
-            box-shadow: 0 12px 36px rgba(0,0,0,.4);
-        }
-
-        .hero-bg {
-            background: radial-gradient(ellipse 80% 60% at 50% 0%, #1c1608 0%, #080809 65%);
-        }
-        .grid-pattern {
-            background-image: repeating-linear-gradient(45deg, rgba(201,168,76,.04) 0px, rgba(201,168,76,.04) 1px, transparent 1px, transparent 40px);
-        }
-
-        .search-box {
-            background: #141418; border: 1.5px solid #2a2a32; border-radius: 14px;
-            color: #f1f1f1; transition: border-color .2s, box-shadow .2s;
-        }
-        .search-box:focus { outline: none; border-color: #C9A84C; box-shadow: 0 0 0 4px rgba(201,168,76,.12); }
-
-        .tag-pill {
-            background: #141418; border: 1px solid #2a2a32; color: #9ca3af;
-            border-radius: 999px; font-size: .75rem; padding: .3rem .85rem;
-            cursor: pointer; transition: border-color .15s, color .15s;
-        }
-        .tag-pill:hover { border-color: #C9A84C; color: #C9A84C; }
-
-        .cat-card {
-            background: #141418; border: 1.5px solid #242428; border-radius: 14px;
-            cursor: pointer; transition: border-color .2s, box-shadow .2s, transform .2s;
-        }
-        .cat-card:hover, .cat-card.active {
-            border-color: #C9A84C; box-shadow: 0 0 22px rgba(201,168,76,.15);
+        .cat-chip:hover, .cat-chip.active {
+            border-color: var(--ckw-bronze);
+            box-shadow: 0 8px 24px rgba(198,146,91,.14);
             transform: translateY(-2px);
         }
 
-        .article-card {
-            background: #141418; border: 1.5px solid #242428; border-radius: 14px;
-            cursor: pointer; transition: border-color .2s, transform .2s, box-shadow .2s; overflow: hidden;
+        /* ── Tag pills ───────────────────────────────── */
+        .tag-pill {
+            border: 1px solid rgba(17,17,17,.12);
+            border-radius: 999px;
+            font-size: .7rem; font-weight: 600;
+            letter-spacing: .06em;
+            color: rgba(17,17,17,.55);
+            padding: .3rem .85rem;
+            cursor: pointer;
+            transition: border-color .15s, color .15s, background .15s;
+            background: transparent;
         }
-        .article-card:hover {
-            border-color: rgba(201,168,76,.55); transform: translateY(-4px);
-            box-shadow: 0 14px 40px rgba(0,0,0,.45);
+        .tag-pill:hover {
+            border-color: var(--ckw-bronze);
+            color: var(--ckw-bronze);
+            background: rgba(198,146,91,.05);
         }
 
+        /* ── Search ──────────────────────────────────── */
+        .search-box {
+            background: rgba(255,253,248,.9);
+            border: 1.5px solid rgba(17,17,17,.12);
+            border-radius: 1rem;
+            color: var(--ckw-carbon);
+            font-family: Montserrat, sans-serif;
+            font-size: .875rem;
+            transition: border-color .2s, box-shadow .2s;
+        }
+        .search-box:focus {
+            outline: none;
+            border-color: var(--ckw-bronze);
+            box-shadow: 0 0 0 4px rgba(198,146,91,.12);
+        }
+        .search-box::placeholder { color: rgba(17,17,17,.35); }
+
+        /* ── Kicker label ────────────────────────────── */
+        .kicker {
+            font-size: .62rem; font-weight: 700;
+            letter-spacing: .17em; text-transform: uppercase;
+            color: var(--ckw-bronze);
+        }
+
+        /* ── Divider ─────────────────────────────────── */
+        .ckw-divider { border-color: rgba(17,17,17,.08); }
+
+        /* ── Hero (light flow) ───────────────────────── */
+        .wiki-hero {
+            background:
+                radial-gradient(circle at 90% 8%, rgba(198,146,91,.13), transparent 26rem),
+                radial-gradient(circle at 6% 0%,  rgba(198,146,91,.10), transparent 22rem),
+                linear-gradient(180deg, #faf7f0, #f1eadf);
+        }
+
+        /* ── Quiz option ─────────────────────────────── */
         .quiz-opt {
-            background: #141418; border: 2px solid #2a2a32; border-radius: 12px;
-            cursor: pointer; transition: border-color .2s, background .2s;
+            background: rgba(255,253,248,.9);
+            border: 1.5px solid rgba(17,17,17,.1);
+            border-radius: 1.15rem;
+            cursor: pointer;
+            transition: border-color .2s, background .2s, transform .15s;
             text-align: left; width: 100%;
         }
-        .quiz-opt:hover { border-color: #C9A84C; background: #1a180e; }
+        .quiz-opt:hover {
+            border-color: var(--ckw-bronze);
+            background: rgba(198,146,91,.05);
+            transform: translateY(-1px);
+        }
 
-        .faq-row { border-bottom: 1px solid #242428; }
+        /* ── FAQ ─────────────────────────────────────── */
+        .faq-row { border-bottom: 1px solid rgba(17,17,17,.08); }
 
-        .prose h3 { color: #C9A84C; font-size: 1.05rem; font-weight: 700; margin: 1.6rem 0 .5rem; }
-        .prose p { color: #d1d5db; line-height: 1.75; margin-bottom: 1rem; }
-        .prose ul { list-style: disc; padding-left: 1.4rem; color: #d1d5db; }
-        .prose li { margin-bottom: .45rem; line-height: 1.65; }
-        .prose strong { color: #f1f1f1; }
+        /* ── Prose (article body) ────────────────────── */
+        .prose h3 {
+            font-family: 'Della Respira', Georgia, serif;
+            font-weight: 400; font-size: 1.2rem;
+            color: var(--ckw-carbon); margin: 1.75rem 0 .6rem;
+        }
+        .prose p { color: rgba(17,17,17,.7); line-height: 1.8; margin-bottom: 1rem; }
+        .prose ul { list-style: disc; padding-left: 1.4rem; color: rgba(17,17,17,.7); }
+        .prose li { margin-bottom: .5rem; line-height: 1.7; }
+        .prose strong { color: var(--ckw-carbon); }
+        .prose em { color: rgba(17,17,17,.75); }
 
-        input[type=range] { accent-color: #C9A84C; cursor: pointer; }
-
-        /* Anatomy SVG clickable zones */
+        /* ── Knife SVG zones ─────────────────────────── */
         .knife-zone { cursor: pointer; transition: opacity .2s; }
         .knife-zone:hover { opacity: .75; }
-        .knife-zone.active { opacity: 1; }
 
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-        .fade-up { animation: fadeUp .35s ease forwards; }
+        /* ── Range slider ────────────────────────────── */
+        input[type=range] { accent-color: var(--ckw-bronze); cursor: pointer; }
 
-        @keyframes pop { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+        /* ── Animations ──────────────────────────────── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up { animation: fadeUp .32s ease forwards; }
+
+        @keyframes pop { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
         .pop { animation: pop .4s ease; }
 
+        /* ── Progress bar ────────────────────────────── */
+        .progress-fill {
+            background: linear-gradient(90deg, var(--ckw-bronze), #d69a7a 55%, #C6925B);
+        }
+
+        /* ── Scrollbar ───────────────────────────────── */
         ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #0a0a0b; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #C9A84C; }
+        ::-webkit-scrollbar-track { background: var(--ckw-cream); }
+        ::-webkit-scrollbar-thumb { background: rgba(17,17,17,.18); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--ckw-bronze); }
+
+        /* ── Selection ───────────────────────────────── */
+        ::selection { background: rgba(198,146,91,.22); }
     </style>
 </head>
 <body x-data="knifeWiki()" x-init="init()" x-cloak>
 
-<!-- ═══════════════════════════════════ NAV ═══════════════════════════════════ -->
-<nav class="fixed top-0 inset-x-0 z-50 bg-[#080809]/90 backdrop-blur-xl border-b border-[#1c1c22]">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+<!-- ═══════ NAV ═══════════════════════════════════════════════════════════════ -->
+<nav class="ckw-header fixed top-0 inset-x-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 h-full flex items-center justify-between gap-4">
         <button @click="setView('home')" class="flex items-center gap-3 group">
-            <div class="w-9 h-9 rounded-lg bg-[#C9A84C] flex items-center justify-center shrink-0">
-                <i data-lucide="chef-hat" class="w-5 h-5 text-black"></i>
+            <div class="w-9 h-9 rounded-xl bg-[#C6925B] flex items-center justify-center shrink-0">
+                <i data-lucide="chef-hat" class="w-5 h-5 text-white"></i>
             </div>
-            <div class="leading-none">
-                <div class="text-white font-bold text-sm">Chef Knife Works</div>
-                <div class="text-[#C9A84C] text-[10px] font-medium tracking-wide uppercase">Knife Knowledge Wiki</div>
+            <div class="leading-none text-left">
+                <div class="text-[#faf9f5] font-bold text-sm" style="font-family:Montserrat,sans-serif">Chef KnifeWorks</div>
+                <div class="text-[#C6925B] text-[10px] font-bold tracking-widest uppercase mt-0.5">Knife Knowledge</div>
             </div>
         </button>
 
-        <div class="hidden md:flex items-center gap-5 text-sm">
-            <button @click="setView('home')" class="text-gray-400 hover:text-white transition-colors">Browse</button>
-            <button @click="setView('quiz')" class="text-gray-400 hover:text-white transition-colors">Sharpness Quiz</button>
-            <button @click="setView('anatomy')" class="text-gray-400 hover:text-white transition-colors">Knife Anatomy</button>
-            <button @click="setView('faq')" class="text-gray-400 hover:text-white transition-colors">FAQ</button>
+        <div class="hidden md:flex items-center gap-6">
+            <button @click="setView('home')"     class="nav-link">Browse</button>
+            <button @click="setView('quiz')"     class="nav-link">Sharpness Quiz</button>
+            <button @click="setView('anatomy')"  class="nav-link">Knife Anatomy</button>
+            <button @click="setView('faq')"      class="nav-link">FAQ</button>
         </div>
 
-        <a href="https://www.chefknifeworks.com" target="_blank" class="btn-gold px-4 py-2 text-sm shrink-0">
+        <a href="https://www.chefknifeworks.com" target="_blank" class="btn btn-bronze">
             Book Sharpening
         </a>
     </div>
 </nav>
 
-<!-- ═══════════════════════════════════ MAIN ═══════════════════════════════════ -->
-<main class="pt-16">
+<!-- ═══════ MAIN ═══════════════════════════════════════════════════════════════ -->
+<main style="padding-top: var(--ckw-header)">
 
-    <!-- ──────────────────── HOME VIEW ──────────────────── -->
+    <!-- ─── HOME ─────────────────────────────────────────────────────────── -->
     <div x-show="view==='home'">
 
-        <!-- HERO -->
-        <section class="hero-bg relative overflow-hidden px-4 py-24 text-center">
-            <div class="absolute inset-0 grid-pattern pointer-events-none"></div>
+        <!-- Hero -->
+        <section class="wiki-hero px-4 py-24 text-center relative overflow-hidden">
             <div class="relative max-w-3xl mx-auto fade-up">
-                <div class="inline-flex items-center gap-2 bg-[#C9A84C]/10 border border-[#C9A84C]/30 text-[#C9A84C] text-xs px-4 py-1.5 rounded-full mb-6 font-medium tracking-wide">
-                    <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
-                    The Complete Knife Knowledge Base
-                </div>
-                <h1 class="text-5xl md:text-6xl font-black text-white mb-5 leading-tight">
-                    Everything You Need to Know<br>
-                    <span class="text-[#C9A84C]">About Your Knives</span>
+                <div class="kicker mb-5">The Complete Knife Knowledge Base</div>
+                <h1 class="text-5xl md:text-6xl text-[#111111] mb-5 leading-tight" style="font-family:'Della Respira',Georgia,serif;font-weight:400">
+                    Everything You Need to Know<br>About Your Knives
                 </h1>
-                <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">
+                <p class="text-[rgba(17,17,17,.62)] text-lg mb-10 max-w-xl mx-auto leading-relaxed">
                     Sharpening angles, steel types, honing, storage — your expert guide to blades that always perform at their peak.
                 </p>
 
                 <!-- Search -->
                 <div class="relative max-w-lg mx-auto mb-4">
-                    <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none"></i>
+                    <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none" style="color:rgba(17,17,17,.35)"></i>
                     <input
                         x-model="searchQuery"
                         @input="handleSearch()"
                         type="text"
                         placeholder="Search tips, sharpening angles, steel types…"
-                        class="search-box w-full pl-12 pr-4 py-4 text-sm"
+                        class="search-box w-full pl-11 pr-4 py-4 text-sm"
                     >
                 </div>
 
-                <!-- Popular tags -->
-                <div class="flex flex-wrap justify-center gap-2">
+                <div class="flex flex-wrap justify-center gap-2 mt-3">
                     <template x-for="tag in popularTags" :key="tag">
                         <button @click="searchQuery=tag; handleSearch()" class="tag-pill" x-text="tag"></button>
                     </template>
@@ -176,157 +314,160 @@
             </div>
         </section>
 
-        <!-- CATEGORIES -->
+        <!-- Categories -->
         <section class="max-w-7xl mx-auto px-4 py-10">
-            <h2 class="text-xl font-bold text-white mb-5">Browse by Topic</h2>
+            <h2 class="text-[1.6rem] text-[#111111] mb-6" style="font-family:'Della Respira',Georgia,serif;font-weight:400">Browse by Topic</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
                 <template x-for="cat in categories" :key="cat.id">
-                    <button
-                        @click="filterByCategory(cat.id)"
-                        class="cat-card p-5 text-center"
-                        :class="{ active: activeCategory===cat.id }"
-                    >
-                        <div class="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center" :style="`background:${cat.color}20`">
+                    <button @click="filterByCategory(cat.id)" class="cat-chip p-5 text-center" :class="{active: activeCategory===cat.id}">
+                        <div class="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center" :style="`background:${cat.color}18`">
                             <i :data-lucide="cat.icon" class="w-6 h-6" :style="`color:${cat.color}`"></i>
                         </div>
-                        <div class="text-white text-xs font-semibold" x-text="cat.label"></div>
-                        <div class="text-gray-600 text-xs mt-1" x-text="cat.count+' articles'"></div>
+                        <div class="text-[#111111] text-xs font-bold" x-text="cat.label"></div>
+                        <div class="text-[rgba(17,17,17,.45)] text-xs mt-1 font-medium" x-text="cat.count+' articles'"></div>
                     </button>
                 </template>
             </div>
         </section>
 
-        <!-- QUIZ BANNER -->
+        <!-- Quiz banner -->
         <section class="max-w-7xl mx-auto px-4 pb-6">
-            <div class="bg-gradient-to-r from-[#1a1408] via-[#181410] to-[#141418] border border-[#C9A84C]/30 rounded-2xl p-7 flex flex-col sm:flex-row items-center gap-6">
+            <div class="surface p-7 flex flex-col sm:flex-row items-center gap-6"
+                style="background:radial-gradient(circle at 95% 0%, rgba(198,146,91,.12), transparent 16rem), rgba(255,253,248,.9);">
                 <div class="text-6xl select-none">🔪</div>
                 <div class="flex-1 text-center sm:text-left">
-                    <div class="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-1">Interactive Quiz</div>
-                    <h3 class="text-white text-2xl font-black mb-2">How Sharp Is Your Knife?</h3>
-                    <p class="text-gray-400 text-sm">5 quick questions to diagnose your blade's sharpness — and find out if it's time for a pro edge.</p>
+                    <div class="kicker mb-1">Interactive Quiz</div>
+                    <h3 class="text-2xl text-[#111111] mb-2" style="font-family:'Della Respira',Georgia,serif;font-weight:400">How Sharp Is Your Knife?</h3>
+                    <p class="text-[rgba(17,17,17,.6)] text-sm">5 quick questions to diagnose your blade's sharpness — and find out if it's time for a pro edge.</p>
                 </div>
-                <button @click="setView('quiz')" class="btn-gold px-8 py-3 whitespace-nowrap text-sm">
-                    Take the Quiz →
+                <button @click="setView('quiz')" class="btn btn-bronze">
+                    Take the Quiz
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </button>
             </div>
         </section>
 
-        <!-- ARTICLES GRID -->
+        <!-- Articles grid -->
         <section class="max-w-7xl mx-auto px-4 py-4 pb-10">
-            <div class="flex items-center justify-between mb-5">
-                <h2 class="text-xl font-bold text-white">
-                    <span x-text="activeCategory==='all' ? 'All Articles' : categories.find(c=>c.id===activeCategory)?.label || 'Articles'"></span>
-                    <span class="text-gray-500 text-sm font-normal ml-2" x-text="`(${filteredArticles.length})`"></span>
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-[1.5rem] text-[#111111]" style="font-family:'Della Respira',Georgia,serif;font-weight:400">
+                    <span x-text="activeCategory==='all' ? 'All Articles' : categories.find(c=>c.id===activeCategory)?.label"></span>
+                    <span class="text-[rgba(17,17,17,.35)] text-base ml-2" x-text="`(${filteredArticles.length})`"></span>
                 </h2>
-                <button x-show="activeCategory!=='all' || searchQuery" @click="activeCategory='all'; searchQuery=''" class="text-[#C9A84C] text-sm hover:underline">
-                    Clear filter
+                <button x-show="activeCategory!=='all' || searchQuery" @click="activeCategory='all'; searchQuery=''"
+                    class="text-[#C6925B] text-xs font-bold uppercase tracking-widest hover:underline">
+                    Clear
                 </button>
             </div>
 
-            <div x-show="filteredArticles.length===0" class="text-center py-20 text-gray-500">
-                <i data-lucide="search-x" class="w-12 h-12 mx-auto mb-4 opacity-40"></i>
-                <p>No articles match that search. Try a different term.</p>
+            <div x-show="filteredArticles.length===0" class="text-center py-20 text-[rgba(17,17,17,.4)]">
+                <i data-lucide="search-x" class="w-10 h-10 mx-auto mb-4 opacity-40"></i>
+                <p class="text-sm">No articles match that search.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 <template x-for="article in filteredArticles" :key="article.id">
-                    <article class="article-card p-6 flex flex-col" @click="openArticle(article)">
+                    <article class="surface surface-hover p-6 flex flex-col" @click="openArticle(article)">
                         <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-semibold px-3 py-1 rounded-full"
-                                :style="`background:${getCategoryColor(article.category)}20; color:${getCategoryColor(article.category)}`"
+                            <span class="text-[.62rem] font-bold px-3 py-1 rounded-full tracking-widest uppercase"
+                                :style="`background:${getCategoryColor(article.category)}14; color:${getCategoryColor(article.category)}`"
                                 x-text="getCategoryLabel(article.category)">
                             </span>
-                            <span class="text-gray-600 text-xs" x-text="article.readTime+' min'"></span>
+                            <span class="text-[rgba(17,17,17,.35)] text-xs font-medium" x-text="article.readTime+' min'"></span>
                         </div>
-                        <div class="text-4xl mb-3 select-none" x-text="article.emoji"></div>
-                        <h3 class="text-white font-bold text-base mb-2 leading-snug flex-1" x-text="article.title"></h3>
-                        <p class="text-gray-400 text-sm" x-text="article.summary"></p>
-                        <div class="mt-5 flex items-center text-[#C9A84C] text-sm font-semibold">
-                            Read article <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                        <div class="text-4xl mb-4 select-none" x-text="article.emoji"></div>
+                        <h3 class="text-[#111111] text-base mb-2 leading-snug flex-1" style="font-family:'Della Respira',Georgia,serif;font-weight:400" x-text="article.title"></h3>
+                        <p class="text-[rgba(17,17,17,.55)] text-sm leading-relaxed" x-text="article.summary"></p>
+                        <div class="mt-5 flex items-center text-[#C6925B] text-xs font-bold uppercase tracking-widest">
+                            Read article <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1.5"></i>
                         </div>
                     </article>
                 </template>
             </div>
         </section>
 
-        <!-- ANATOMY BANNER -->
+        <!-- Anatomy banner -->
         <section class="max-w-7xl mx-auto px-4 pb-6">
-            <div class="card p-7 flex flex-col sm:flex-row items-center gap-6">
+            <div class="surface p-7 flex flex-col sm:flex-row items-center gap-6">
                 <div class="flex-1 text-center sm:text-left">
-                    <div class="text-blue-400 text-xs font-bold tracking-widest uppercase mb-1">Interactive Guide</div>
-                    <h3 class="text-white text-2xl font-black mb-2">Explore Knife Anatomy</h3>
-                    <p class="text-gray-400 text-sm">Learn every part of your knife and how it affects sharpening, performance, and longevity.</p>
+                    <div class="kicker mb-1" style="color:#6b8f7a">Interactive Guide</div>
+                    <h3 class="text-2xl text-[#111111] mb-2" style="font-family:'Della Respira',Georgia,serif;font-weight:400">Explore Knife Anatomy</h3>
+                    <p class="text-[rgba(17,17,17,.6)] text-sm">Learn every part of your knife and how it affects sharpening, performance, and longevity.</p>
                 </div>
-                <button @click="setView('anatomy')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-3 rounded-xl transition-colors whitespace-nowrap text-sm">
-                    Explore Anatomy →
+                <button @click="setView('anatomy')" class="btn btn-dark">
+                    Explore Anatomy
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </button>
             </div>
         </section>
 
-        <!-- BOOKING CTA -->
-        <section class="bg-gradient-to-b from-[#080809] to-[#110e04] border-t border-[#C9A84C]/20 px-4 py-20 text-center mt-6">
+        <!-- Booking CTA -->
+        <section class="px-4 py-20 text-center mt-4" style="background:linear-gradient(180deg,var(--ckw-cream) 0%,#f1eadf 100%); border-top: 1px solid rgba(17,17,17,.07)">
             <div class="max-w-2xl mx-auto">
-                <div class="text-7xl mb-5 select-none">⚔️</div>
-                <h2 class="text-4xl md:text-5xl font-black text-white mb-4">
-                    Ready for a <span class="text-[#C9A84C]">Professional Edge?</span>
+                <div class="text-7xl mb-6 select-none">⚔️</div>
+                <h2 class="text-4xl md:text-5xl text-[#111111] mb-4 leading-tight" style="font-family:'Della Respira',Georgia,serif;font-weight:400">
+                    Ready for a Professional Edge?
                 </h2>
-                <p class="text-gray-400 text-lg mb-8 max-w-lg mx-auto">
+                <p class="text-[rgba(17,17,17,.62)] text-lg mb-10 max-w-lg mx-auto leading-relaxed">
                     No home sharpener matches a professional service. Let us restore your blades to factory-perfect — or better.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="https://www.chefknifeworks.com" target="_blank" class="btn-gold px-10 py-4 text-base">
+                    <a href="https://www.chefknifeworks.com" target="_blank" class="btn btn-bronze text-sm">
                         Book My Sharpening Appointment
                     </a>
-                    <button @click="setView('quiz')" class="border border-[#2a2a32] text-white px-8 py-4 rounded-xl hover:border-[#C9A84C] transition-colors text-sm font-medium">
+                    <button @click="setView('quiz')" class="btn btn-outline text-sm">
                         Take the Sharpness Quiz First
                     </button>
                 </div>
-                <p class="text-gray-600 text-xs mt-5">Most knives done within 24 hours · Free edge inspection</p>
+                <p class="text-[rgba(17,17,17,.35)] text-xs mt-6 font-medium tracking-wide uppercase">
+                    Most knives done within 24 hours · Free edge inspection
+                </p>
             </div>
         </section>
     </div>
 
-    <!-- ──────────────────── ARTICLE VIEW ──────────────────── -->
+    <!-- ─── ARTICLE VIEW ──────────────────────────────────────────────────── -->
     <div x-show="view==='article'" x-cloak>
-        <div class="max-w-3xl mx-auto px-4 py-12" x-show="currentArticle">
-            <button @click="setView('home')" class="flex items-center gap-2 text-gray-400 hover:text-white text-sm mb-10 transition-colors">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Knowledge Base
+        <div class="max-w-3xl mx-auto px-4 py-14" x-show="currentArticle">
+            <button @click="setView('home')" class="flex items-center gap-2 text-[rgba(17,17,17,.45)] hover:text-[#111111] text-xs font-bold uppercase tracking-widest mb-10 transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Knowledge Base
             </button>
 
             <template x-if="currentArticle">
                 <div class="fade-up">
                     <div class="flex items-center gap-3 mb-5">
-                        <span class="text-xs font-semibold px-3 py-1 rounded-full"
-                            :style="`background:${getCategoryColor(currentArticle.category)}20; color:${getCategoryColor(currentArticle.category)}`"
+                        <span class="text-[.62rem] font-bold px-3 py-1 rounded-full tracking-widest uppercase"
+                            :style="`background:${getCategoryColor(currentArticle.category)}14; color:${getCategoryColor(currentArticle.category)}`"
                             x-text="getCategoryLabel(currentArticle.category)">
                         </span>
-                        <span class="text-gray-500 text-xs" x-text="currentArticle.readTime+' min read'"></span>
+                        <span class="text-[rgba(17,17,17,.35)] text-xs font-medium" x-text="currentArticle.readTime+' min read'"></span>
                     </div>
                     <div class="text-6xl mb-5 select-none" x-text="currentArticle.emoji"></div>
-                    <h1 class="text-3xl md:text-4xl font-black text-white mb-4 leading-tight" x-text="currentArticle.title"></h1>
-                    <p class="text-gray-400 text-lg mb-10 leading-relaxed" x-text="currentArticle.summary"></p>
+                    <h1 class="text-4xl md:text-5xl text-[#111111] mb-5 leading-tight" style="font-family:'Della Respira',Georgia,serif;font-weight:400" x-text="currentArticle.title"></h1>
+                    <p class="text-[rgba(17,17,17,.62)] text-lg mb-12 leading-relaxed" x-text="currentArticle.summary"></p>
 
                     <div class="prose" x-html="currentArticle.content"></div>
 
-                    <!-- Article booking CTA -->
-                    <div class="mt-14 bg-gradient-to-r from-[#1a1408] to-[#141418] border border-[#C9A84C]/30 rounded-2xl p-8 text-center">
+                    <!-- Booking CTA -->
+                    <div class="mt-16 surface p-8 text-center"
+                        style="background:radial-gradient(circle at 95% 5%, rgba(198,146,91,.12), transparent 18rem), rgba(255,253,248,.95);">
                         <div class="text-4xl mb-3">🔪</div>
-                        <h3 class="text-white text-xl font-black mb-2">Time for a Professional Touch?</h3>
-                        <p class="text-gray-400 text-sm mb-6">Knowledge is only the first step. Let Chef Knife Works put a perfect edge on your blades.</p>
-                        <a href="https://www.chefknifeworks.com" target="_blank" class="btn-gold px-8 py-3">
+                        <h3 class="text-2xl text-[#111111] mb-2" style="font-family:'Della Respira',Georgia,serif;font-weight:400">Time for a Professional Touch?</h3>
+                        <p class="text-[rgba(17,17,17,.6)] text-sm mb-7 max-w-sm mx-auto">Knowledge is only the first step. Let Chef KnifeWorks put a perfect edge on your blades.</p>
+                        <a href="https://www.chefknifeworks.com" target="_blank" class="btn btn-bronze">
                             Book a Sharpening Appointment
                         </a>
                     </div>
 
                     <!-- Related articles -->
                     <div class="mt-12" x-show="relatedArticles.length > 0">
-                        <h3 class="text-white font-bold text-lg mb-4">Related Articles</h3>
+                        <h3 class="text-xl text-[#111111] mb-5" style="font-family:'Della Respira',Georgia,serif;font-weight:400">Related Articles</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <template x-for="art in relatedArticles" :key="art.id">
-                                <div class="article-card p-5" @click="openArticle(art)">
+                                <div class="surface surface-hover p-5" @click="openArticle(art)">
                                     <div class="text-3xl mb-2 select-none" x-text="art.emoji"></div>
-                                    <h4 class="text-white font-semibold text-sm mb-1" x-text="art.title"></h4>
-                                    <p class="text-gray-500 text-xs" x-text="art.summary"></p>
+                                    <h4 class="text-[#111111] text-sm mb-1 leading-snug" style="font-family:'Della Respira',Georgia,serif;font-weight:400" x-text="art.title"></h4>
+                                    <p class="text-[rgba(17,17,17,.45)] text-xs" x-text="art.summary"></p>
                                 </div>
                             </template>
                         </div>
@@ -336,43 +477,46 @@
         </div>
     </div>
 
-    <!-- ──────────────────── QUIZ VIEW ──────────────────── -->
+    <!-- ─── QUIZ VIEW ─────────────────────────────────────────────────────── -->
     <div x-show="view==='quiz'" x-cloak>
-        <div class="max-w-2xl mx-auto px-4 py-12">
-            <button @click="setView('home')" class="flex items-center gap-2 text-gray-400 hover:text-white text-sm mb-10 transition-colors">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Knowledge Base
+        <div class="max-w-2xl mx-auto px-4 py-14">
+            <button @click="setView('home')" class="flex items-center gap-2 text-[rgba(17,17,17,.45)] hover:text-[#111111] text-xs font-bold uppercase tracking-widest mb-10 transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Knowledge Base
             </button>
 
-            <!-- Start screen -->
+            <!-- Start -->
             <div x-show="!quizStarted && !quizComplete" class="text-center fade-up">
                 <div class="text-8xl mb-6 select-none">🔪</div>
-                <h1 class="text-4xl font-black text-white mb-4">How Sharp Is Your Knife?</h1>
-                <p class="text-gray-400 text-lg mb-10">5 quick questions to diagnose your blade's sharpness — and find out exactly what to do about it.</p>
-                <button @click="startQuiz()" class="btn-gold px-12 py-4 text-base">Start the Quiz →</button>
+                <h1 class="text-4xl md:text-5xl text-[#111111] mb-4" style="font-family:'Della Respira',Georgia,serif;font-weight:400">How Sharp Is Your Knife?</h1>
+                <p class="text-[rgba(17,17,17,.62)] text-lg mb-10 leading-relaxed">5 quick questions to diagnose your blade's sharpness — and find out exactly what to do about it.</p>
+                <button @click="startQuiz()" class="btn btn-bronze">
+                    Start the Quiz
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
             </div>
 
             <!-- Questions -->
             <div x-show="quizStarted && !quizComplete" class="fade-up">
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="flex-1 bg-[#1a1a1e] rounded-full h-2.5">
-                        <div
-                            class="h-2.5 rounded-full bg-[#C9A84C] transition-all duration-500"
-                            :style="`width:${((quizStep-1)/quizQuestions.length)*100}%`"
-                        ></div>
+                <!-- Progress -->
+                <div class="flex items-center gap-4 mb-10">
+                    <div class="flex-1 bg-[rgba(17,17,17,.08)] rounded-full h-2">
+                        <div class="h-2 rounded-full progress-fill transition-all duration-500"
+                            :style="`width:${((quizStep-1)/quizQuestions.length)*100}%`"></div>
                     </div>
-                    <span class="text-gray-400 text-sm whitespace-nowrap" x-text="`${quizStep} / ${quizQuestions.length}`"></span>
+                    <span class="text-[rgba(17,17,17,.45)] text-xs font-bold tracking-wide whitespace-nowrap" x-text="`${quizStep} / ${quizQuestions.length}`"></span>
                 </div>
 
                 <template x-if="quizStarted && quizQuestions[quizStep-1]">
                     <div>
-                        <div class="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-3" x-text="`Question ${quizStep}`"></div>
-                        <h2 class="text-2xl font-bold text-white mb-7 leading-snug" x-text="quizQuestions[quizStep-1].question"></h2>
+                        <div class="kicker mb-3" x-text="`Question ${quizStep}`"></div>
+                        <h2 class="text-2xl text-[#111111] mb-7 leading-snug" style="font-family:'Della Respira',Georgia,serif;font-weight:400" x-text="quizQuestions[quizStep-1].question"></h2>
                         <div class="space-y-3">
                             <template x-for="(opt, i) in quizQuestions[quizStep-1].options" :key="i">
                                 <button @click="answerQuiz(opt.score)" class="quiz-opt p-4 flex items-center gap-4">
-                                    <div class="w-9 h-9 rounded-full bg-[#1e1e24] flex items-center justify-center text-sm font-bold text-gray-400 shrink-0"
+                                    <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
+                                        style="background:rgba(17,17,17,.06); color:rgba(17,17,17,.55)"
                                         x-text="['A','B','C','D'][i]"></div>
-                                    <span class="text-white text-sm text-left" x-text="opt.text"></span>
+                                    <span class="text-[#111111] text-sm text-left leading-relaxed" x-text="opt.text"></span>
                                 </button>
                             </template>
                         </div>
@@ -383,206 +527,189 @@
             <!-- Results -->
             <div x-show="quizComplete" class="text-center fade-up">
                 <div class="text-8xl mb-4 select-none pop" x-text="quizResult?.emoji"></div>
-                <div class="text-[#C9A84C] text-xs font-bold tracking-widest uppercase mb-2">Your Result</div>
-                <h2 class="text-3xl font-black text-white mb-4" x-text="quizResult?.title"></h2>
-                <p class="text-gray-400 text-lg mb-8" x-text="quizResult?.description"></p>
+                <div class="kicker mb-3">Your Result</div>
+                <h2 class="text-3xl text-[#111111] mb-4" style="font-family:'Della Respira',Georgia,serif;font-weight:400" x-text="quizResult?.title"></h2>
+                <p class="text-[rgba(17,17,17,.62)] text-lg mb-8 leading-relaxed" x-text="quizResult?.description"></p>
 
-                <!-- Score visualization -->
-                <div class="card p-7 mb-7">
-                    <div class="flex justify-between text-xs text-gray-500 mb-2">
+                <!-- Score bar -->
+                <div class="surface p-7 mb-7">
+                    <div class="flex justify-between text-xs font-bold tracking-wide mb-2 uppercase" style="color:rgba(17,17,17,.35)">
                         <span>🏆 Razor Sharp</span>
                         <span>🆘 Butter Knife</span>
                     </div>
-                    <div class="bg-[#1a1a1e] rounded-full h-5 relative overflow-visible">
-                        <div
-                            class="h-5 rounded-full transition-all duration-1000"
-                            :style="`width:${quizResult?.barPct}%; background:linear-gradient(90deg,#4ade80,#facc15,#ef4444)`"
-                        ></div>
+                    <div class="bg-[rgba(17,17,17,.07)] rounded-full h-4">
+                        <div class="h-4 rounded-full progress-fill transition-all duration-1000"
+                            :style="`width:${quizResult?.barPct}%`"></div>
                     </div>
-                    <div class="mt-3 text-white font-bold text-lg" x-text="`Sharpness Score: ${quizResult?.sharpScore}%`"></div>
+                    <div class="mt-3 text-[#111111] font-bold text-lg" style="font-family:'Della Respira',Georgia,serif" x-text="`Sharpness Score: ${quizResult?.sharpScore}%`"></div>
                 </div>
 
                 <template x-if="quizResult?.needsBooking">
-                    <div class="bg-gradient-to-r from-[#1a1408] to-[#141418] border border-[#C9A84C]/40 rounded-2xl p-7 mb-6">
-                        <p class="text-white font-semibold mb-5 text-lg" x-text="quizResult?.cta"></p>
-                        <a href="https://www.chefknifeworks.com" target="_blank" class="btn-gold px-8 py-3">
-                            Book My Sharpening Now →
+                    <div class="surface p-7 mb-6" style="background:radial-gradient(circle at 95% 5%, rgba(198,146,91,.12), transparent 16rem), rgba(255,253,248,.95); border-color: rgba(198,146,91,.3)">
+                        <p class="text-[#111111] font-semibold mb-5 text-base" x-text="quizResult?.cta"></p>
+                        <a href="https://www.chefknifeworks.com" target="_blank" class="btn btn-bronze">
+                            Book My Sharpening Now
                         </a>
                     </div>
                 </template>
 
                 <template x-if="quizResult && !quizResult.needsBooking">
-                    <div class="card p-7 mb-6">
-                        <p class="text-gray-300 mb-5" x-text="quizResult?.cta"></p>
-                        <a href="https://www.chefknifeworks.com" target="_blank"
-                            class="border border-[#C9A84C] text-[#C9A84C] px-8 py-3 rounded-xl text-sm font-bold hover:bg-[#C9A84C]/10 transition-colors inline-block">
-                            Schedule a Tune-Up Anyway →
+                    <div class="surface p-7 mb-6">
+                        <p class="text-[rgba(17,17,17,.65)] mb-5" x-text="quizResult?.cta"></p>
+                        <a href="https://www.chefknifeworks.com" target="_blank" class="btn btn-outline">
+                            Schedule a Tune-Up Anyway
                         </a>
                     </div>
                 </template>
 
-                <button @click="resetQuiz()" class="text-gray-500 text-sm hover:text-gray-300 transition-colors mt-2">
+                <button @click="resetQuiz()" class="text-[rgba(17,17,17,.4)] text-xs font-bold uppercase tracking-widest hover:text-[#111111] transition-colors mt-2">
                     ↩ Retake the quiz
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- ──────────────────── ANATOMY VIEW ──────────────────── -->
+    <!-- ─── ANATOMY VIEW ──────────────────────────────────────────────────── -->
     <div x-show="view==='anatomy'" x-cloak>
-        <div class="max-w-7xl mx-auto px-4 py-12">
-            <button @click="setView('home')" class="flex items-center gap-2 text-gray-400 hover:text-white text-sm mb-8 transition-colors">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Knowledge Base
+        <div class="max-w-7xl mx-auto px-4 py-14">
+            <button @click="setView('home')" class="flex items-center gap-2 text-[rgba(17,17,17,.45)] hover:text-[#111111] text-xs font-bold uppercase tracking-widest mb-8 transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Knowledge Base
             </button>
 
-            <h1 class="text-3xl font-black text-white mb-2">Knife Anatomy</h1>
-            <p class="text-gray-400 mb-10">Click any part label to learn how it affects cutting performance and sharpening.</p>
+            <h1 class="text-4xl text-[#111111] mb-2" style="font-family:'Della Respira',Georgia,serif;font-weight:400">Knife Anatomy</h1>
+            <p class="text-[rgba(17,17,17,.55)] mb-10">Click any part label to learn how it affects cutting performance and sharpening.</p>
 
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-7">
-                <!-- Left column: SVG + angle guide -->
+                <!-- Diagram + angle -->
                 <div class="lg:col-span-3 space-y-5">
 
-                    <!-- SVG Knife Diagram -->
-                    <div class="card p-7">
+                    <div class="surface p-7">
                         <svg viewBox="0 0 700 200" class="w-full" style="max-height:220px">
                             <!-- Handle -->
                             <rect x="20" y="78" width="175" height="64" rx="12"
-                                class="knife-zone" :class="{active:activeAnatomyPart==='handle'}"
-                                :fill="activeAnatomyPart==='handle' ? '#8a6a50' : '#5a4a3c'"
+                                class="knife-zone"
+                                :fill="activeAnatomyPart==='handle' ? '#C6925B' : '#8B7355'"
                                 @click="setAnatomyPart('handle')" />
-                            <!-- Rivets (decorative) -->
-                            <circle cx="58"  cy="110" r="7" fill="#7a6050" class="pointer-events-none" />
-                            <circle cx="110" cy="110" r="7" fill="#7a6050" class="pointer-events-none" />
-                            <circle cx="162" cy="110" r="7" fill="#7a6050" class="pointer-events-none" />
+                            <circle cx="58"  cy="110" r="7" fill="rgba(17,17,17,.25)" class="pointer-events-none"/>
+                            <circle cx="110" cy="110" r="7" fill="rgba(17,17,17,.25)" class="pointer-events-none"/>
+                            <circle cx="162" cy="110" r="7" fill="rgba(17,17,17,.25)" class="pointer-events-none"/>
 
                             <!-- Bolster -->
                             <rect x="192" y="73" width="24" height="74" rx="3"
-                                class="knife-zone" :class="{active:activeAnatomyPart==='bolster'}"
-                                :fill="activeAnatomyPart==='bolster' ? '#7a7a92' : '#4a4a5c'"
+                                class="knife-zone"
+                                :fill="activeAnatomyPart==='bolster' ? '#C6925B' : '#6B6B7A'"
                                 @click="setAnatomyPart('bolster')" />
 
-                            <!-- Blade body (clickable for 'blade') -->
+                            <!-- Blade body -->
                             <path d="M 216 88 L 655 106 Q 560 150 400 160 Q 285 165 216 148 Z"
-                                class="knife-zone" :class="{active:activeAnatomyPart==='blade'}"
-                                :fill="activeAnatomyPart==='blade' ? '#5a5a72' : '#38384c'"
+                                class="knife-zone"
+                                :fill="activeAnatomyPart==='blade' ? '#C6925B' : '#5A5A6E'"
                                 @click="setAnatomyPart('blade')" />
 
-                            <!-- Spine line (clickable) -->
-                            <path d="M 216 88 L 655 106" stroke="#7a7a92" stroke-width="4" fill="none"
-                                class="knife-zone" style="cursor:pointer"
-                                :stroke="activeAnatomyPart==='spine' ? '#C9A84C' : '#7a7a92'"
+                            <!-- Spine -->
+                            <path d="M 216 88 L 655 106" stroke-width="4" fill="none" class="knife-zone" style="cursor:pointer"
+                                :stroke="activeAnatomyPart==='spine' ? '#C6925B' : '#8A8AA0'"
                                 @click="setAnatomyPart('spine')" />
 
-                            <!-- Edge line gold (clickable) -->
-                            <path d="M 216 148 Q 285 165 400 160 Q 560 150 655 106" stroke="#C9A84C" stroke-width="2.5" fill="none"
-                                class="knife-zone" style="cursor:pointer"
+                            <!-- Edge -->
+                            <path d="M 216 148 Q 285 165 400 160 Q 560 150 655 106" fill="none" class="knife-zone" style="cursor:pointer"
+                                :stroke="activeAnatomyPart==='edge' ? '#C6925B' : '#C6925B'"
                                 :stroke-width="activeAnatomyPart==='edge' ? 4 : 2.5"
                                 @click="setAnatomyPart('edge')" />
 
-                            <!-- Heel circle -->
-                            <circle cx="218" cy="118" r="18"
-                                fill="transparent" stroke="transparent"
-                                class="knife-zone" @click="setAnatomyPart('heel')" />
+                            <!-- Heel (invisible hit area) -->
+                            <circle cx="218" cy="118" r="18" fill="transparent" class="knife-zone" @click="setAnatomyPart('heel')" />
+                            <!-- Tip (invisible hit area) -->
+                            <circle cx="648" cy="106" r="18" fill="transparent" class="knife-zone" @click="setAnatomyPart('tip')" />
 
-                            <!-- Tip circle -->
-                            <circle cx="648" cy="106" r="18"
-                                fill="transparent" stroke="transparent"
-                                class="knife-zone" @click="setAnatomyPart('tip')" />
-
-                            <!-- Static labels -->
-                            <text x="107" y="60" text-anchor="middle" fill="#9ca3af" font-size="11" class="pointer-events-none select-none">Handle</text>
-                            <text x="204" y="60" text-anchor="middle" fill="#9ca3af" font-size="11" class="pointer-events-none select-none">Bolster</text>
-                            <text x="218" y="175" text-anchor="middle" fill="#9ca3af" font-size="11" class="pointer-events-none select-none">Heel</text>
-                            <text x="420" y="186" text-anchor="middle" fill="#C9A84C" font-size="11" class="pointer-events-none select-none">← Belly (Edge) →</text>
-                            <text x="655" y="90" text-anchor="middle" fill="#9ca3af" font-size="11" class="pointer-events-none select-none">Tip</text>
-                            <text x="435" y="78" text-anchor="middle" fill="#9ca3af" font-size="11" class="pointer-events-none select-none">Spine</text>
+                            <!-- Labels -->
+                            <text x="107"  y="60"  text-anchor="middle" fill="rgba(17,17,17,.4)" font-size="11" font-family="Montserrat,sans-serif" class="pointer-events-none select-none">Handle</text>
+                            <text x="204"  y="60"  text-anchor="middle" fill="rgba(17,17,17,.4)" font-size="11" font-family="Montserrat,sans-serif" class="pointer-events-none select-none">Bolster</text>
+                            <text x="218"  y="178" text-anchor="middle" fill="rgba(17,17,17,.4)" font-size="11" font-family="Montserrat,sans-serif" class="pointer-events-none select-none">Heel</text>
+                            <text x="420"  y="186" text-anchor="middle" fill="#C6925B"            font-size="11" font-family="Montserrat,sans-serif" class="pointer-events-none select-none">← Belly (Edge) →</text>
+                            <text x="655"  y="90"  text-anchor="middle" fill="rgba(17,17,17,.4)" font-size="11" font-family="Montserrat,sans-serif" class="pointer-events-none select-none">Tip</text>
+                            <text x="435"  y="78"  text-anchor="middle" fill="rgba(17,17,17,.4)" font-size="11" font-family="Montserrat,sans-serif" class="pointer-events-none select-none">Spine</text>
                         </svg>
 
-                        <!-- Part selector pills -->
                         <div class="flex flex-wrap gap-2 mt-6">
                             <template x-for="(part, key) in anatomyParts" :key="key">
-                                <button
-                                    @click="setAnatomyPart(key)"
-                                    class="text-xs px-3 py-1.5 rounded-full border transition-all duration-150"
+                                <button @click="setAnatomyPart(key)"
+                                    class="text-xs px-3 py-1.5 rounded-full border font-bold tracking-widest uppercase transition-all duration-150"
                                     :class="activeAnatomyPart===key
-                                        ? 'border-[#C9A84C] text-[#C9A84C] bg-[#C9A84C]/10 font-semibold'
-                                        : 'border-[#2a2a32] text-gray-400 hover:border-[#C9A84C]/50'"
-                                    x-text="part.name"
-                                ></button>
+                                        ? 'border-[#C6925B] text-[#C6925B] bg-[rgba(198,146,91,.08)]'
+                                        : 'border-[rgba(17,17,17,.12)] text-[rgba(17,17,17,.5)] hover:border-[rgba(198,146,91,.5)]'"
+                                    x-text="part.name">
+                                </button>
                             </template>
                         </div>
                     </div>
 
-                    <!-- Sharpening Angle Guide -->
-                    <div class="card p-6">
-                        <h3 class="text-white font-bold text-lg mb-1">Sharpening Angle Guide</h3>
-                        <p class="text-gray-400 text-sm mb-6">Drag the slider to see how angle affects edge type and what knives use it.</p>
+                    <!-- Angle guide -->
+                    <div class="surface p-6">
+                        <h3 class="text-xl text-[#111111] mb-1" style="font-family:'Della Respira',Georgia,serif;font-weight:400">Sharpening Angle Guide</h3>
+                        <p class="text-[rgba(17,17,17,.55)] text-sm mb-6">Drag to see how angle affects edge type and which knives use it.</p>
                         <div class="flex items-end gap-6">
-                            <!-- Visual angle display -->
-                            <div class="relative bg-[#0a0a0b] rounded-xl w-36 h-24 flex items-end overflow-hidden shrink-0">
-                                <div class="absolute bottom-0 left-0 right-0 h-px bg-[#2a2a32]"></div>
-                                <div
-                                    class="absolute bottom-0 left-6 w-28 h-px bg-[#C9A84C] origin-left transition-transform duration-300"
-                                    :style="`transform: rotate(-${angleGuide}deg); transform-origin: left center`"
-                                ></div>
-                                <div class="absolute top-2 right-3 text-[#C9A84C] font-black text-2xl leading-none" x-text="angleGuide+'°'"></div>
+                            <div class="relative rounded-xl w-36 h-24 flex items-end overflow-hidden shrink-0" style="background:rgba(17,17,17,.04)">
+                                <div class="absolute bottom-0 left-0 right-0 h-px" style="background:rgba(17,17,17,.15)"></div>
+                                <div class="absolute bottom-0 left-6 w-28 h-px origin-left transition-transform duration-300"
+                                    style="background:#C6925B"
+                                    :style="`transform: rotate(-${angleGuide}deg); transform-origin: left center`"></div>
+                                <div class="absolute top-2 right-3 font-black text-2xl leading-none" style="color:#C6925B;font-family:'Della Respira',Georgia,serif" x-text="angleGuide+'°'"></div>
                             </div>
                             <div class="flex-1">
                                 <input type="range" min="10" max="30" x-model="angleGuide" class="w-full mb-3 h-2">
-                                <div class="text-white font-bold text-sm mb-1" x-text="getAngleInfo(angleGuide).type"></div>
-                                <div class="text-gray-400 text-xs" x-text="getAngleInfo(angleGuide).examples"></div>
-                                <div class="mt-2 text-xs text-gray-500" x-text="getAngleInfo(angleGuide).note"></div>
+                                <div class="text-[#111111] font-bold text-sm mb-1" x-text="getAngleInfo(angleGuide).type"></div>
+                                <div class="text-[rgba(17,17,17,.55)] text-xs" x-text="getAngleInfo(angleGuide).examples"></div>
+                                <div class="text-[rgba(17,17,17,.4)] text-xs mt-1.5 italic" x-text="getAngleInfo(angleGuide).note"></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right column: Part info + FAQ -->
+                <!-- Info panel + FAQ -->
                 <div class="lg:col-span-2 space-y-5">
-                    <!-- Part info -->
-                    <div class="card p-6 min-h-[200px] flex items-center justify-center">
-                        <div x-show="!activeAnatomyPart" class="text-center text-gray-500">
+                    <div class="surface min-h-[200px] flex items-center justify-center p-6">
+                        <div x-show="!activeAnatomyPart" class="text-center" style="color:rgba(17,17,17,.35)">
                             <div class="text-4xl mb-3">👆</div>
-                            <p class="text-sm">Click a part on the diagram<br>to learn what it does.</p>
+                            <p class="text-sm font-medium">Click a part on the diagram<br>to learn what it does.</p>
                         </div>
                         <template x-if="activeAnatomyPart && anatomyParts[activeAnatomyPart]">
-                            <div class="fade-up w-full" style="border-color: rgba(201,168,76,.3);">
+                            <div class="fade-up w-full">
                                 <div class="text-4xl mb-3 select-none" x-text="anatomyParts[activeAnatomyPart].emoji"></div>
-                                <h3 class="text-white font-black text-xl mb-2" x-text="anatomyParts[activeAnatomyPart].name"></h3>
-                                <p class="text-gray-400 text-sm mb-5" x-text="anatomyParts[activeAnatomyPart].description"></p>
-                                <div class="bg-[#0d0d10] rounded-xl p-4">
-                                    <div class="text-[#C9A84C] text-xs font-bold uppercase tracking-widest mb-2">Pro Tip</div>
-                                    <p class="text-gray-300 text-xs leading-relaxed" x-text="anatomyParts[activeAnatomyPart].tip"></p>
+                                <h3 class="text-2xl text-[#111111] mb-2" style="font-family:'Della Respira',Georgia,serif;font-weight:400" x-text="anatomyParts[activeAnatomyPart].name"></h3>
+                                <p class="text-[rgba(17,17,17,.6)] text-sm mb-5 leading-relaxed" x-text="anatomyParts[activeAnatomyPart].description"></p>
+                                <div class="rounded-xl p-4" style="background:rgba(198,146,91,.07); border: 1px solid rgba(198,146,91,.2)">
+                                    <div class="kicker mb-2">Pro Tip</div>
+                                    <p class="text-[rgba(17,17,17,.65)] text-xs leading-relaxed" x-text="anatomyParts[activeAnatomyPart].tip"></p>
                                 </div>
                             </div>
                         </template>
                     </div>
 
-                    <!-- Quick FAQ -->
-                    <div class="card p-6">
-                        <h4 class="text-white font-bold mb-4">Quick FAQ</h4>
-                        <div class="space-y-1">
+                    <div class="surface p-6">
+                        <h4 class="text-lg text-[#111111] mb-4" style="font-family:'Della Respira',Georgia,serif;font-weight:400">Quick FAQ</h4>
+                        <div>
                             <template x-for="(faq, idx) in quickFaqs" :key="idx">
-                                <div class="faq-row pb-3">
+                                <div class="faq-row">
                                     <button @click="openFaq = openFaq===idx ? null : idx"
-                                        class="w-full text-left flex justify-between items-start gap-3 pt-3">
-                                        <span class="text-gray-300 text-sm" x-text="faq.q"></span>
-                                        <i data-lucide="chevron-down" class="w-4 h-4 text-gray-500 shrink-0 mt-0.5 transition-transform duration-200"
+                                        class="w-full text-left flex justify-between items-start gap-3 py-4">
+                                        <span class="text-[#111111] text-sm font-medium" x-text="faq.q"></span>
+                                        <i data-lucide="chevron-down" class="w-4 h-4 shrink-0 mt-0.5 transition-transform duration-200"
+                                            style="color:rgba(17,17,17,.35)"
                                             :class="{'rotate-180': openFaq===idx}"></i>
                                     </button>
-                                    <div x-show="openFaq===idx" x-collapse class="pt-2">
-                                        <p class="text-gray-400 text-xs leading-relaxed" x-text="faq.a"></p>
+                                    <div x-show="openFaq===idx" x-collapse class="pb-4">
+                                        <p class="text-[rgba(17,17,17,.55)] text-xs leading-relaxed" x-text="faq.a"></p>
                                     </div>
                                 </div>
                             </template>
                         </div>
                     </div>
 
-                    <!-- Booking CTA -->
-                    <div class="bg-gradient-to-br from-[#1a1408] to-[#141418] border border-[#C9A84C]/30 rounded-2xl p-6 text-center">
+                    <div class="surface p-6 text-center" style="background:radial-gradient(circle at 95% 5%, rgba(198,146,91,.12), transparent 14rem), rgba(255,253,248,.95);">
                         <div class="text-3xl mb-2">⚔️</div>
-                        <p class="text-white font-bold mb-3 text-sm">Ready for the perfect edge?</p>
-                        <a href="https://www.chefknifeworks.com" target="_blank" class="btn-gold px-6 py-2.5 text-sm">
+                        <p class="text-[#111111] font-semibold text-sm mb-4" style="font-family:'Della Respira',Georgia,serif;font-weight:400">Ready for the perfect edge?</p>
+                        <a href="https://www.chefknifeworks.com" target="_blank" class="btn btn-bronze text-xs">
                             Book an Appointment
                         </a>
                     </div>
@@ -591,37 +718,39 @@
         </div>
     </div>
 
-    <!-- ──────────────────── FAQ VIEW ──────────────────── -->
+    <!-- ─── FAQ VIEW ──────────────────────────────────────────────────────── -->
     <div x-show="view==='faq'" x-cloak>
-        <div class="max-w-3xl mx-auto px-4 py-12">
-            <button @click="setView('home')" class="flex items-center gap-2 text-gray-400 hover:text-white text-sm mb-10 transition-colors">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Knowledge Base
+        <div class="max-w-3xl mx-auto px-4 py-14">
+            <button @click="setView('home')" class="flex items-center gap-2 text-[rgba(17,17,17,.45)] hover:text-[#111111] text-xs font-bold uppercase tracking-widest mb-10 transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Knowledge Base
             </button>
-            <h1 class="text-4xl font-black text-white mb-3">Frequently Asked Questions</h1>
-            <p class="text-gray-400 mb-10">Answers to the most common questions we get from customers about knife sharpening and care.</p>
+            <div class="kicker mb-4">Everything You Need to Know</div>
+            <h1 class="text-5xl text-[#111111] mb-3 leading-tight" style="font-family:'Della Respira',Georgia,serif;font-weight:400">Frequently Asked<br>Questions</h1>
+            <p class="text-[rgba(17,17,17,.55)] mb-12 leading-relaxed">Answers to the most common questions we get from customers about knife sharpening and care.</p>
 
-            <div class="card divide-y divide-[#242428]">
+            <div class="surface divide-y divide-[rgba(17,17,17,.08)]">
                 <template x-for="(faq, idx) in allFaqs" :key="idx">
-                    <div class="px-6">
+                    <div class="px-7">
                         <button @click="openFaqFull = openFaqFull===idx ? null : idx"
-                            class="w-full text-left flex justify-between items-start gap-4 py-5">
-                            <span class="text-white font-semibold" x-text="faq.q"></span>
-                            <i data-lucide="chevron-down" class="w-5 h-5 text-gray-400 shrink-0 mt-0.5 transition-transform duration-200"
+                            class="w-full text-left flex justify-between items-start gap-4 py-6">
+                            <span class="text-[#111111] font-semibold text-base" x-text="faq.q"></span>
+                            <i data-lucide="chevron-down" class="w-5 h-5 shrink-0 mt-0.5 transition-transform duration-200"
+                                style="color:rgba(17,17,17,.35)"
                                 :class="{'rotate-180': openFaqFull===idx}"></i>
                         </button>
-                        <div x-show="openFaqFull===idx" x-collapse class="pb-5">
-                            <p class="text-gray-400 leading-relaxed" x-text="faq.a"></p>
+                        <div x-show="openFaqFull===idx" x-collapse class="pb-6">
+                            <p class="text-[rgba(17,17,17,.62)] leading-relaxed" x-text="faq.a"></p>
                         </div>
                     </div>
                 </template>
             </div>
 
-            <div class="mt-10 bg-gradient-to-r from-[#1a1408] to-[#141418] border border-[#C9A84C]/30 rounded-2xl p-8 text-center">
+            <div class="surface mt-10 p-8 text-center" style="background:radial-gradient(circle at 95% 5%, rgba(198,146,91,.12), transparent 18rem), rgba(255,253,248,.95);">
                 <div class="text-3xl mb-3">💬</div>
-                <h3 class="text-white text-xl font-black mb-2">Have a question we didn't answer?</h3>
-                <p class="text-gray-400 text-sm mb-6">Reach out directly — we love talking knives. Or just book an appointment and we'll talk in person.</p>
-                <a href="https://www.chefknifeworks.com" target="_blank" class="btn-gold px-8 py-3">
-                    Visit chefknifeworks.com
+                <h3 class="text-2xl text-[#111111] mb-2" style="font-family:'Della Respira',Georgia,serif;font-weight:400">Still have a question?</h3>
+                <p class="text-[rgba(17,17,17,.55)] text-sm mb-7 max-w-xs mx-auto">We love talking knives. Book an appointment and we'll talk in person.</p>
+                <a href="https://www.chefknifeworks.com" target="_blank" class="btn btn-bronze">
+                    Visit Chef KnifeWorks
                 </a>
             </div>
         </div>
@@ -629,29 +758,29 @@
 
 </main>
 
-<!-- ═══════════════════════════════════ FOOTER ═══════════════════════════════════ -->
-<footer class="bg-[#080809] border-t border-[#141418] px-4 py-8 mt-6">
+<!-- ═══════ FOOTER ══════════════════════════════════════════════════════════ -->
+<footer style="background: #f1eadf; border-top: 1px solid rgba(17,17,17,.08)" class="px-4 py-8 mt-6">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
         <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg bg-[#C9A84C] flex items-center justify-center">
-                <i data-lucide="chef-hat" class="w-4 h-4 text-black"></i>
+            <div class="w-8 h-8 rounded-lg bg-[#C6925B] flex items-center justify-center">
+                <i data-lucide="chef-hat" class="w-4 h-4 text-white"></i>
             </div>
             <div>
-                <div class="text-white font-bold text-sm">Chef Knife Works</div>
-                <div class="text-gray-600 text-xs">Professional Knife Sharpening</div>
+                <div class="text-[#111111] font-bold text-sm">Chef KnifeWorks</div>
+                <div class="text-[rgba(17,17,17,.4)] text-xs font-medium">Professional Knife Sharpening · Maple Grove, MN</div>
             </div>
         </div>
-        <p class="text-gray-700 text-xs">
-            © 2026 Chef Knife Works ·
-            <a href="https://www.chefknifeworks.com" target="_blank" class="hover:text-[#C9A84C] transition-colors">chefknifeworks.com</a>
+        <p class="text-[rgba(17,17,17,.35)] text-xs font-medium">
+            © 2026 Chef KnifeWorks ·
+            <a href="https://www.chefknifeworks.com" target="_blank" class="hover:text-[#C6925B] transition-colors">chefknifeworks.com</a>
         </p>
-        <a href="https://www.chefknifeworks.com" target="_blank" class="btn-gold px-6 py-2 text-sm">
+        <a href="https://www.chefknifeworks.com" target="_blank" class="btn btn-dark text-xs">
             Book Sharpening
         </a>
     </div>
 </footer>
 
-<!-- ═══════════════════════════════════ ALPINE APP ═══════════════════════════════════ -->
+<!-- ═══════ ALPINE APP ═════════════════════════════════════════════════════ -->
 <script>
 function knifeWiki() {
     return {
@@ -659,31 +788,25 @@ function knifeWiki() {
         activeCategory: 'all',
         searchQuery: '',
         currentArticle: null,
-
-        // Quiz state
         quizStarted: false,
         quizComplete: false,
         quizStep: 1,
         quizScore: 0,
         quizResult: null,
-
-        // Anatomy state
         activeAnatomyPart: null,
         angleGuide: 20,
         openFaq: null,
         openFaqFull: null,
 
-        // ── STATIC DATA ────────────────────────────────────────────────────────
-
         popularTags: ['honing', 'sharpening angles', 'whetstone', 'knife care', 'dishwasher', 'steel types', 'cutting board'],
 
         categories: [
-            { id: 'all',          label: 'All Topics',  icon: 'layout-grid', color: '#C9A84C', count: 10 },
-            { id: 'sharpening',   label: 'Sharpening',  icon: 'zap',         color: '#60a5fa', count: 3  },
-            { id: 'types',        label: 'Knife Types', icon: 'utensils',    color: '#4ade80', count: 2  },
-            { id: 'steel',        label: 'Steel Guide', icon: 'layers',      color: '#a78bfa', count: 2  },
-            { id: 'maintenance',  label: 'Maintenance', icon: 'shield',      color: '#f97316', count: 2  },
-            { id: 'professional', label: 'Pro Service', icon: 'star',        color: '#C9A84C', count: 1  },
+            { id: 'all',          label: 'All Topics',  icon: 'layout-grid', color: '#C6925B', count: 10 },
+            { id: 'sharpening',   label: 'Sharpening',  icon: 'zap',         color: '#4A7B9D', count: 3  },
+            { id: 'types',        label: 'Knife Types', icon: 'utensils',    color: '#6B8F5E', count: 2  },
+            { id: 'steel',        label: 'Steel Guide', icon: 'layers',      color: '#7A6B8A', count: 2  },
+            { id: 'maintenance',  label: 'Maintenance', icon: 'shield',      color: '#9B6B4A', count: 2  },
+            { id: 'professional', label: 'Pro Service', icon: 'star',        color: '#C6925B', count: 1  },
         ],
 
         articles: [
@@ -695,22 +818,16 @@ function knifeWiki() {
                 tags: ['dull knife', 'signs', 'when to sharpen', 'tomato test'],
                 content: `
                     <p>Most home cooks don't realize how dull their knives have gotten. It happens gradually — each use removes microscopic amounts of steel from the edge — and over time that razor-sharp blade becomes a glorified butter spreader.</p>
-
                     <h3>1. The Tomato Test</h3>
                     <p>Place a ripe tomato on the cutting board and rest the blade against the skin <strong>without pressing down</strong>. A sharp knife begins to slice with gravity alone. A dull knife skids across the surface. If you're applying pressure to cut a tomato, your knife needs attention.</p>
-
                     <h3>2. The Paper Test</h3>
                     <p>Hold a sheet of printer paper by the top edge and draw the blade downward in a slicing motion. A sharp knife cuts cleanly. A dull knife tears, snags, or pushes the paper aside. One of the fastest and most reliable sharpness checks you can do.</p>
-
                     <h3>3. You're Pressing Harder</h3>
                     <p>If you notice you've started using more force — pressing down on vegetables, sawing through proteins — your knife is working against you. <strong>A sharp knife does the work. A dull knife makes you do it.</strong></p>
-
                     <h3>4. The Arm Hair Test</h3>
                     <p>Lightly drag the flat of the blade across your forearm hairs. A truly sharp knife shaves hair cleanly. A dull knife pushes or catches. Use extreme caution with this test, and only do it on a stationary blade.</p>
-
                     <h3>5. It's Been More Than 6 Months</h3>
                     <p>For daily home use, professional sharpening every 6–12 months is the baseline. If you can't remember the last time your knives were professionally sharpened, they almost certainly need it.</p>
-
                     <h3>The Safety Angle</h3>
                     <p>A dull knife is actually <strong>more dangerous</strong> than a sharp one. It requires more force, is more likely to slip, and causes more fatigue. Don't wait for frustration to signal you — schedule sharpening proactively.</p>
                 `
@@ -723,25 +840,18 @@ function knifeWiki() {
                 tags: ['honing', 'sharpening', 'honing rod', 'whetstone', 'maintenance'],
                 content: `
                     <p>One of the most common knife misconceptions: honing and sharpening are the same thing. They're not — and knowing the difference will dramatically improve how you care for your blades.</p>
-
                     <h3>What Is Honing?</h3>
                     <p>Honing <em>realigns</em> the microscopic edge of your blade. When you use a knife, the ultra-thin cutting edge bends slightly out of alignment. Honing straightens it back. <strong>No metal is removed.</strong> Use a honing steel or ceramic rod before or after each cooking session.</p>
-
                     <h3>What Is Sharpening?</h3>
                     <p>Sharpening actually <em>removes metal</em> to create a fresh, sharp edge. Done with abrasives — whetstones, diamond plates, or electric grinders. This is repair work: it corrects damage and restores a truly dull edge.</p>
-
                     <h3>The Simple Rule</h3>
                     <ul>
                         <li><strong>Hone regularly</strong> — before each session, or at minimum weekly for home cooks</li>
                         <li><strong>Sharpen periodically</strong> — 1–4 times per year, depending on use intensity</li>
                         <li><strong>Get professional sharpening</strong> when your knife fails the tomato test even after honing</li>
                     </ul>
-
                     <h3>Why Honing Alone Isn't Enough</h3>
                     <p>Eventually, even a well-maintained edge loses its geometry. Steel wears down. Micro-chips develop. At that point, honing can't help — you need metal removal to restore a sharp bevel. That's when professional sharpening earns its keep.</p>
-
-                    <h3>What About Honing Rods vs. Diamond Rods?</h3>
-                    <p>A smooth steel rod <em>hones</em>. A diamond-coated rod <em>lightly sharpens</em>. Ceramic rods sit between the two. For regular maintenance, a smooth honing steel is all most cooks need. Save the abrasive rods for occasional touch-ups between professional appointments.</p>
                 `
             },
             {
@@ -751,25 +861,19 @@ function knifeWiki() {
                 readTime: 7,
                 tags: ['sharpening angles', '15 degree', '20 degree', 'Japanese', 'German', 'western'],
                 content: `
-                    <p>Sharpening angle might be the single most important variable in knife sharpening — and the most misunderstood. Get it right, and you have the perfect edge for your knife and use case. Get it wrong, and all your effort produces a mediocre result.</p>
-
+                    <p>Sharpening angle might be the single most important variable in knife sharpening — and the most misunderstood. Get it right, and you have the perfect edge for your knife and use case.</p>
                     <h3>How Angles Are Measured</h3>
                     <p>Sharpening angles are measured <strong>per side</strong>. A "20° knife" has an included (total) angle of 40°. The lower the number, the thinner and sharper the edge. The higher the number, the thicker and more durable.</p>
-
                     <h3>10–15° Per Side: Ultra-Fine Japanese</h3>
-                    <p>Traditional Japanese knives (yanagiba, usuba, sushi blades) are ground to 10–15° per side. Extraordinarily sharp — capable of paper-thin, whisper-quiet slices. Very fragile: more prone to chipping, requires wood cutting surfaces only, and demands skilled maintenance.</p>
-
+                    <p>Traditional Japanese knives (yanagiba, usuba, sushi blades) are ground to 10–15° per side. Extraordinarily sharp. Very fragile: prone to chipping, requires wood cutting surfaces only, and demands skilled maintenance.</p>
                     <h3>15–17° Per Side: Modern Japanese</h3>
-                    <p>Most premium Japanese kitchen knives (Shun, Global, Mac, Miyabi) live in this range. Still very sharp, but with meaningfully more durability than traditional Japanese angles. The sweet spot for serious home cooks who want performance without babying their blades.</p>
-
+                    <p>Most premium Japanese kitchen knives (Shun, Global, Mac, Miyabi) live in this range. Still very sharp, but with meaningfully more durability. The sweet spot for serious home cooks.</p>
                     <h3>18–22° Per Side: Western / German</h3>
-                    <p>Wüsthof, Henckels, and most Western-style chef's knives are designed for this range. More durable and chip-resistant — they can handle harder foods, occasional bone contact, and less delicate treatment. Slightly less razor-sharp, but far more forgiving.</p>
-
+                    <p>Wüsthof, Henckels, and most Western-style chef's knives are designed for this range. More durable and chip-resistant. Slightly less razor-sharp, but far more forgiving.</p>
                     <h3>22–30° Per Side: Heavy-Duty & Outdoor</h3>
-                    <p>Cleavers, hunting knives, and camping blades are sharpened at high angles for maximum edge durability. These edges can take abuse, chop through dense materials, and maintain a functional edge over sustained hard use.</p>
-
+                    <p>Cleavers, hunting knives, and camping blades are sharpened at high angles for maximum edge durability. These edges can take abuse and maintain a functional edge over sustained hard use.</p>
                     <h3>Why This Matters for Professional Sharpening</h3>
-                    <p>A professional sharpener knows the correct angle for your specific knife and sharpens to <strong>factory spec — or better</strong>. Sharpening at the wrong angle, even once, can permanently change the edge geometry and take significant effort to correct. When in doubt, leave angle work to a pro.</p>
+                    <p>A professional sharpener knows the correct angle for your specific knife and sharpens to <strong>factory spec — or better</strong>. Sharpening at the wrong angle can permanently change the edge geometry. When in doubt, leave angle work to a pro.</p>
                 `
             },
             {
@@ -779,28 +883,19 @@ function knifeWiki() {
                 readTime: 6,
                 tags: ['knife types', 'chef knife', 'paring knife', 'santoku', 'bread knife', 'boning'],
                 content: `
-                    <p>Having the right knife for the job isn't just about comfort — it's about safety, efficiency, and the quality of your cuts. Here's a practical guide to the most essential kitchen blades.</p>
-
+                    <p>Having the right knife for the job isn't just about comfort — it's about safety, efficiency, and the quality of your cuts.</p>
                     <h3>Chef's Knife (8–10")</h3>
                     <p>The workhorse. Use it for: chopping vegetables, mincing herbs, slicing meat, dicing onions. The long blade and curved belly make it ideal for the rocking motion most Western cooks use. This is the knife that should always be sharpest.</p>
-
                     <h3>Paring Knife (3–4")</h3>
                     <p>For detail work: peeling fruit, trimming fat, deveining shrimp, segmenting citrus. Often used in-hand rather than on a board. Should be razor-sharp for maximum control and safety.</p>
-
                     <h3>Santoku (6–7")</h3>
-                    <p>The Japanese all-purpose knife. Shorter and flatter than a chef's knife, with a sheepsfoot tip. Excels at thin, clean slices — vegetables, fish, boneless proteins. Often ground at a tighter angle than Western knives.</p>
-
+                    <p>The Japanese all-purpose knife. Shorter and flatter than a chef's knife, with a sheepsfoot tip. Excels at thin, clean slices — vegetables, fish, boneless proteins.</p>
                     <h3>Bread / Serrated Knife (8–10")</h3>
-                    <p>The only serrated knife most kitchens need. The saw-like edge cuts through crusty loaves and soft interiors without crushing. Also excellent for tomatoes and cakes. Serrated knives require specialized sharpening — not all services offer it, but we do.</p>
-
+                    <p>The only serrated knife most kitchens need. Cuts through crusty loaves without crushing. Also excellent for tomatoes and cakes. Serrated knives require specialized sharpening — we offer this service.</p>
                     <h3>Boning Knife (5–7")</h3>
-                    <p>Narrow and flexible (or stiff), designed to navigate around bones and joints. Essential for breaking down whole chickens, trimming ribs, or filleting fish. The narrow blade requires a very acute edge angle to work properly.</p>
-
+                    <p>Narrow and flexible (or stiff), designed to navigate around bones and joints. Essential for breaking down whole chickens, trimming ribs, or filleting fish.</p>
                     <h3>Cleaver</h3>
-                    <p>Heavy-duty, rectangular blade for splitting bones and dense vegetables. Not meant to be razor-sharp — it works by weight and momentum. Still needs periodic sharpening to maintain a serviceable, safe edge.</p>
-
-                    <h3>Fillet Knife</h3>
-                    <p>Long, thin, highly flexible — designed specifically to remove skin and fillet fish with precision. The extreme flexibility requires careful sharpening to maintain a consistent bevel angle along the full length.</p>
+                    <p>Heavy-duty, rectangular blade for splitting bones and dense vegetables. Works by weight and momentum. Still needs periodic sharpening to maintain a serviceable, safe edge.</p>
                 `
             },
             {
@@ -810,29 +905,22 @@ function knifeWiki() {
                 readTime: 8,
                 tags: ['steel types', 'high carbon', 'stainless', 'VG-10', 'Damascus', 'ceramic', 'HRC', 'Rockwell'],
                 content: `
-                    <p>Steel is the soul of a knife. The alloy determines how sharp it gets, how long it holds an edge, how easy it is to resharpen, and how much maintenance it demands. Here's a plain-language breakdown.</p>
-
+                    <p>Steel is the soul of a knife. The alloy determines how sharp it gets, how long it holds an edge, how easy it is to resharpen, and how much maintenance it demands.</p>
                     <h3>High Carbon Steel</h3>
-                    <p>The traditional choice — 1%+ carbon content. Takes a finer, sharper edge than stainless and is easier to resharpen. Trade-off: rusts and stains easily. Requires immediate drying and occasional oiling. Beloved by professional chefs and knife enthusiasts for its raw performance.</p>
-
+                    <p>The traditional choice — 1%+ carbon content. Takes a finer, sharper edge than stainless and is easier to resharpen. Trade-off: rusts and stains easily. Requires immediate drying and occasional oiling. Beloved by professional chefs for its raw performance.</p>
                     <h3>Stainless Steel</h3>
-                    <p>Contains 12%+ chromium, which forms an oxide layer that resists rust. More forgiving on maintenance, but generally harder to get truly sharp and doesn't hold an edge as long as high carbon. Great for cooks who want a functional knife without high-maintenance care.</p>
-
+                    <p>Contains 12%+ chromium, which resists rust. More forgiving on maintenance, but generally harder to get truly sharp and doesn't hold an edge as long as high carbon.</p>
                     <h3>High-Carbon Stainless (VG-10, 440C, 154CM, AUS-10)</h3>
-                    <p>The modern sweet spot. These alloys combine high carbon for sharpness and edge retention with chromium for rust resistance. VG-10 is the gold standard for Japanese kitchen knives — used in Shun, Miyabi, and many others. Sharpen well, hold edges longer, resist corrosion. Ideal for serious home cooks.</p>
-
+                    <p>The modern sweet spot. These alloys combine high carbon for sharpness with chromium for rust resistance. VG-10 is the gold standard for Japanese kitchen knives — used in Shun, Miyabi, and many others.</p>
                     <h3>Damascus Steel</h3>
-                    <p>Damascus refers to a technique (pattern-welding multiple steel types), not a single alloy. The core steel — the actual cutting edge — is what matters for performance. Damascus cladding is primarily aesthetic, though it can add impact resistance. Judge a Damascus knife by its core steel specification.</p>
-
+                    <p>Damascus refers to a technique (pattern-welding multiple steel types), not a single alloy. The core steel — the actual cutting edge — is what matters for performance. The beautiful swirl pattern is primarily aesthetic.</p>
                     <h3>Ceramic</h3>
-                    <p>Not steel at all — zirconium oxide. Extremely hard (9.5 Mohs vs. steel's 6–8), stays sharp for a very long time. Brittle: chips easily on hard foods or from drops, requires specialized diamond sharpening equipment. Not the right tool for every kitchen or every cook.</p>
-
+                    <p>Not steel at all — zirconium oxide. Extremely hard, stays sharp for a very long time. Brittle: chips easily on hard foods or from drops, requires specialized diamond sharpening equipment.</p>
                     <h3>Understanding HRC (Rockwell Hardness)</h3>
-                    <p>Steel hardness is rated on the Rockwell C scale. Higher = harder steel:</p>
                     <ul>
-                        <li><strong>52–56 HRC</strong> — Softer Western knives. Tough, chip-resistant, easy to resharpen. Great for rough use.</li>
-                        <li><strong>58–62 HRC</strong> — Most Japanese kitchen knives. Holds a sharp edge longer, but chips more easily on hard foods.</li>
-                        <li><strong>63–67 HRC</strong> — Premium Japanese steels (HAP-40, ZDP-189). Exceptional edge retention, but very brittle — requires expert handling.</li>
+                        <li><strong>52–56 HRC</strong> — Softer Western knives. Tough, chip-resistant, easy to resharpen.</li>
+                        <li><strong>58–62 HRC</strong> — Most Japanese kitchen knives. Holds a sharp edge longer, but chips more easily.</li>
+                        <li><strong>63–67 HRC</strong> — Premium Japanese steels. Exceptional edge retention, but very brittle.</li>
                     </ul>
                 `
             },
@@ -844,30 +932,24 @@ function knifeWiki() {
                 tags: ['dishwasher', 'knife care', 'hand washing', 'maintenance', 'rust'],
                 content: `
                     <p>We hear it constantly from customers: <em>"My knives used to be so sharp."</em> The first question we ask: <em>"Do you put them in the dishwasher?"</em> The answer, more often than not, is yes.</p>
-
                     <h3>What the Dishwasher Does to a Knife</h3>
-                    <p>The dishwasher is a perfect storm of blade damage:</p>
                     <ul>
-                        <li><strong>High heat</strong> weakens the steel's temper, making it softer and harder to keep sharp over time</li>
-                        <li><strong>Harsh detergents</strong> (especially those with bleach or phosphates) aggressively corrode high-carbon steel and pit stainless</li>
-                        <li><strong>Rattling and vibration</strong> causes blades to knock against other items, creating micro-chips and dings on the cutting edge</li>
-                        <li><strong>Prolonged moisture exposure</strong> rusts carbon steel and degrades organic handle materials (wood, bone, composite)</li>
+                        <li><strong>High heat</strong> weakens the steel's temper, making it softer and harder to keep sharp</li>
+                        <li><strong>Harsh detergents</strong> aggressively corrode high-carbon steel and pit stainless</li>
+                        <li><strong>Rattling and vibration</strong> creates micro-chips and dings on the cutting edge</li>
+                        <li><strong>Prolonged moisture</strong> rusts carbon steel and degrades handle materials</li>
                     </ul>
-
                     <h3>What to Do Instead</h3>
-                    <p>Hand washing takes 30 seconds and adds years to a knife's life:</p>
                     <ul>
-                        <li>Rinse the blade with warm water immediately after use</li>
-                        <li>Wipe gently with a soft cloth or sponge — never steel wool or abrasive pads</li>
-                        <li>Dry immediately and thoroughly with a towel — never air-dry</li>
+                        <li>Rinse with warm water immediately after use</li>
+                        <li>Wipe gently with a soft cloth — never steel wool</li>
+                        <li>Dry immediately and thoroughly — never air-dry</li>
                         <li>Never let knives soak in a wet sink</li>
                     </ul>
-
                     <h3>What About Stainless Steel?</h3>
-                    <p>"My knife is stainless — isn't it resistant?" Stainless steel is more forgiving, but the dishwasher still dulls edges rapidly from rattling and detergent chemistry. No quality knife belongs in a dishwasher. Not one. Not ever.</p>
-
+                    <p>Stainless is more forgiving, but the dishwasher still dulls edges rapidly from rattling and detergent chemistry. No quality knife belongs in a dishwasher. Not one. Not ever.</p>
                     <h3>The Damage Is Cumulative</h3>
-                    <p>One dishwasher cycle won't ruin your knife. But 50 cycles? 200? That's when you end up with a corroded, dull, handle-rattling blade that needs significant professional restoration — or replacement. The 30 seconds of hand washing is always the better investment.</p>
+                    <p>One cycle won't ruin your knife. But 200 cycles? That's when you end up with a corroded, dull, handle-rattling blade that needs significant restoration — or replacement.</p>
                 `
             },
             {
@@ -878,46 +960,36 @@ function knifeWiki() {
                 tags: ['cutting board', 'wood', 'plastic', 'glass', 'bamboo', 'edge wear'],
                 content: `
                     <p>Your cutting board is one of the biggest factors in how long your knife's edge lasts between sharpenings. The wrong surface can dull a razor-sharp knife faster than almost anything else.</p>
-
                     <h3>Best: End-Grain Wood</h3>
-                    <p>End-grain boards are the gold standard for knife care. The blade slides <em>between</em> the wood fibers rather than <em>across</em> them, dramatically reducing edge wear. The fibers self-heal to some extent after cutting. Maple, walnut, and cherry are excellent choices. Requires periodic oiling to prevent cracking.</p>
-
+                    <p>End-grain boards are the gold standard for knife care. The blade slides <em>between</em> the wood fibers rather than <em>across</em> them, dramatically reducing edge wear. Maple, walnut, and cherry are excellent choices. Requires periodic oiling to prevent cracking.</p>
                     <h3>Good: Edge-Grain Wood</h3>
-                    <p>More common and affordable than end-grain, and far better than hard synthetics. The edge wears a bit faster than end-grain, but these boards are durable and kind to knife edges. A solid everyday option for most kitchens.</p>
-
+                    <p>More common and affordable than end-grain, and far better than hard synthetics. A solid everyday option for most kitchens.</p>
                     <h3>Acceptable: Heavy Polypropylene Plastic</h3>
-                    <p>A quality, thick polypropylene board is knife-friendly and dishwasher-safe. The surface has enough flex to be gentle on edges. These are the commercial kitchen standard — easy to sanitize. Avoid thin, rigid plastic, which is rough on edges.</p>
-
+                    <p>A quality, thick polypropylene board is knife-friendly and dishwasher-safe. The surface has enough flex to be gentle on edges. The commercial kitchen standard.</p>
                     <h3>Avoid: Bamboo</h3>
-                    <p>Despite its popularity, bamboo is very hard and harsh on knife edges. Its silica content makes it as abrasive as some sharpening stones. A bamboo board can dull a knife faster than any other "cutting board" material. Skip it.</p>
-
+                    <p>Despite its popularity, bamboo is very hard and harsh on knife edges. Its silica content makes it as abrasive as some sharpening stones. Skip it.</p>
                     <h3>Never: Glass, Marble, Stone, Ceramic Tile</h3>
-                    <p>These surfaces are significantly harder than steel. Cutting on glass or marble is essentially running your edge through a grinding wheel. A single session on a glass board can cause damage that would otherwise take months of normal use. <strong>Never</strong> use these for knife work.</p>
+                    <p>These surfaces are significantly harder than steel. Cutting on glass or marble is essentially running your edge through a grinding wheel. <strong>Never</strong> use these for knife work.</p>
                 `
             },
             {
                 id: 8, category: 'maintenance', emoji: '🧲',
                 title: 'How to Store Knives Properly',
-                summary: 'Tossing knives loose in a drawer is one of the worst things you can do. Here are all storage options — ranked from best to worst.',
+                summary: 'Tossing knives loose in a drawer is one of the worst things you can do. Here are all storage options — ranked.',
                 readTime: 3,
                 tags: ['knife storage', 'knife block', 'magnetic strip', 'drawer', 'blade guard'],
                 content: `
                     <p>Knife storage directly impacts edge longevity and safety. A properly stored knife stays sharper longer and is safer to reach for.</p>
-
                     <h3>Best: Magnetic Knife Strip</h3>
-                    <p>A wall-mounted magnetic strip keeps blades exposed, dry, and easily accessible. No contact with other metal, no rubbing, no drawer chaos. Mount away from the stove (heat, grease) and out of children's reach. Makes a beautiful display and keeps the countertop clear.</p>
-
+                    <p>A wall-mounted magnetic strip keeps blades exposed, dry, and easily accessible. No contact with other metal, no rubbing. Mount away from the stove and out of children's reach.</p>
                     <h3>Good: Knife Block</h3>
-                    <p>The classic. Key tips: store knives with <strong>the edge facing up</strong> (spine-down into the slot) so the edge doesn't contact the wood. Or look for angled blocks designed for safe insertion. Clean the slots regularly — crumbs and moisture accumulate. Make sure slot width fits your blades.</p>
-
+                    <p>Store knives with <strong>the edge facing up</strong> (spine-down into the slot) so the edge doesn't contact the wood. Clean the slots regularly — crumbs and moisture accumulate.</p>
                     <h3>Good: In-Drawer Knife Dock</h3>
-                    <p>A dedicated in-drawer holder (bamboo block dock or individual knife guards) keeps blades separated and protected. Much better than loose in a drawer. Takes up drawer space but keeps counters clear — great for smaller kitchens.</p>
-
+                    <p>A dedicated in-drawer holder keeps blades separated and protected. Much better than loose in a drawer. Good for smaller kitchens where counter space is limited.</p>
                     <h3>Acceptable: Individual Blade Guards</h3>
-                    <p>Plastic sheaths that slip over each blade for storage anywhere. Good for travel, outdoor cooking, or overflow storage. Always ensure the blade is completely dry before capping — trapped moisture causes rust.</p>
-
+                    <p>Plastic sheaths for storage anywhere. Good for travel or overflow. Always ensure the blade is completely dry before capping — trapped moisture causes rust.</p>
                     <h3>Never: Loose in a Drawer</h3>
-                    <p>Loose knives bang against other utensils with every open and close, creating micro-chips on the edge with every knock. It's also a safety hazard — reaching into a drawer and contacting a blade edge is how cuts happen. This is never acceptable storage for quality knives.</p>
+                    <p>Loose knives bang against other utensils with every open and close, creating micro-chips on the edge. It's also a safety hazard. This is never acceptable storage for quality knives.</p>
                 `
             },
             {
@@ -927,28 +999,20 @@ function knifeWiki() {
                 readTime: 8,
                 tags: ['whetstone', 'water stone', 'sharpening stones', 'grit', 'burr', 'angle'],
                 content: `
-                    <p>Among all sharpening methods, whetstones (water stones) deliver the highest quality results when used correctly. The learning curve is real, but the payoff is knives that rival a professional finish.</p>
-
+                    <p>Among all sharpening methods, whetstones deliver the highest quality results when used correctly. The learning curve is real, but the payoff is knives that rival a professional finish.</p>
                     <h3>Understanding Grit</h3>
-                    <p>Like sandpaper, whetstones come in different grits — lower number means coarser abrasive:</p>
                     <ul>
-                        <li><strong>120–400 grit:</strong> Coarse. For severely damaged edges, chips, or reprofiling. Removes metal fast — use sparingly.</li>
-                        <li><strong>800–2000 grit:</strong> Medium. The primary sharpening stage for most maintenance work on a dull knife.</li>
+                        <li><strong>120–400 grit:</strong> Coarse. For severely damaged edges or reprofiling. Removes metal fast.</li>
+                        <li><strong>800–2000 grit:</strong> Medium. The primary sharpening stage for most maintenance work.</li>
                         <li><strong>3000–6000 grit:</strong> Fine. Refines the edge, removes scratches from coarser stones.</li>
-                        <li><strong>8000+ grit:</strong> Ultra-fine / polishing. Creates a mirror finish edge. Japanese knives especially benefit from this stage.</li>
+                        <li><strong>8000+ grit:</strong> Ultra-fine. Creates a mirror finish. Japanese knives especially benefit from this stage.</li>
                     </ul>
-
                     <h3>The Most Important Rule: Consistent Angle</h3>
-                    <p>Pick your angle (15° for Japanese, 20° for Western) and <strong>do not let it waver</strong> through the stroke. Inconsistent angles produce a rounded, dull bevel rather than a clean, sharp one. This is the skill that separates great results from mediocre ones.</p>
-
+                    <p>Pick your angle (15° for Japanese, 20° for Western) and <strong>do not let it waver</strong> through the stroke. Inconsistent angles produce a rounded, dull bevel rather than a clean, sharp one.</p>
                     <h3>The Burr Test</h3>
-                    <p>As you sharpen one side, a tiny "burr" (fold of steel) forms on the opposite edge. Lightly drag your thumb <em>across</em> the flat of the blade (not along the edge!) — you'll feel it as a slight catch. When you feel the burr consistently from heel to tip, flip and sharpen the other side. When the burr transfers, move to a finer grit.</p>
-
-                    <h3>Strops: The Final Step</h3>
-                    <p>A leather strop loaded with stropping compound removes the final burr and polishes the apex of the edge to its sharpest possible finish. Even a few passes on a strop dramatically improves the feel and performance of a freshly sharpened blade.</p>
-
+                    <p>As you sharpen one side, a tiny "burr" forms on the opposite edge. Lightly drag your thumb <em>across</em> the flat of the blade — you'll feel it as a slight catch. When you feel it consistently from heel to tip, flip and sharpen the other side.</p>
                     <h3>When DIY Sharpening Isn't Enough</h3>
-                    <p>Whetstones require practice, and mistakes happen. If you've chipped a blade, sharpened at an inconsistent angle, or taken too much metal off one side, a professional service can reset the geometry. Think of professional sharpening as a "reset" — perfect geometry you then maintain yourself with regular honing.</p>
+                    <p>If you've chipped a blade, sharpened at an inconsistent angle, or taken too much metal off one side, a professional service can reset the geometry. Think of professional sharpening as a "reset" you then maintain yourself.</p>
                 `
             },
             {
@@ -958,28 +1022,21 @@ function knifeWiki() {
                 readTime: 5,
                 tags: ['professional sharpening', 'knife service', 'worth it', 'benefits', 'how often'],
                 content: `
-                    <p>There's a difference between sharp and <em>professionally sharp</em>. Here's why Chef Knife Works customers always notice the difference — and why they keep coming back.</p>
-
+                    <p>There's a difference between sharp and <em>professionally sharp</em>. Here's why Chef KnifeWorks customers always notice the difference — and keep coming back.</p>
                     <h3>The Professional Difference</h3>
                     <p>Professional knife sharpening uses calibrated equipment and years of expertise to restore blades to <strong>geometrically perfect edges</strong>. Where a home sharpener approximates the angle, a professional hits it precisely — every time, along every millimeter of the blade.</p>
-
                     <h3>What Happens During a Professional Service</h3>
                     <ul>
-                        <li><strong>Inspection:</strong> The blade is examined for chips, existing bevel angle, steel condition, and overall geometry</li>
-                        <li><strong>Profiling:</strong> If needed, the edge geometry is corrected with a coarse stone — straightening a wavy edge or removing chips</li>
+                        <li><strong>Inspection:</strong> The blade is examined for chips, existing bevel angle, and steel condition</li>
+                        <li><strong>Profiling:</strong> Edge geometry is corrected if needed — straightening a wavy edge or removing chips</li>
                         <li><strong>Progressive Sharpening:</strong> Multiple grit stages bring the edge from dull to sharp to refined</li>
-                        <li><strong>Finishing:</strong> A leather strop or ultra-fine stone polishes the apex to a consistent, razor finish</li>
-                        <li><strong>Quality Check:</strong> The blade is tested for sharpness and consistency before being returned to you</li>
+                        <li><strong>Finishing:</strong> A leather strop or ultra-fine stone polishes the apex to a consistent razor finish</li>
+                        <li><strong>Quality Check:</strong> The blade is tested for sharpness and consistency before being returned</li>
                     </ul>
-
-                    <h3>The Honest Truth About Cheap Sharpeners</h3>
-                    <p>Pull-through and entry-level electric sharpeners are fast and convenient, but they remove significantly more metal than necessary and typically produce an uneven, coarse edge. Used repeatedly, they shorten a knife's lifespan dramatically. They're a band-aid, not a solution.</p>
-
                     <h3>How Often Should You Book?</h3>
-                    <p>For most home cooks using quality knives daily, <strong>1–2 professional sharpenings per year</strong> is the standard recommendation. Between appointments, maintain with a honing rod before each use. Professionals who cook all day may need quarterly service to stay at peak performance.</p>
-
+                    <p>For most home cooks using quality knives daily, <strong>1–2 professional sharpenings per year</strong> is the standard recommendation. Between appointments, maintain with a honing rod before each use.</p>
                     <h3>The Value Is Obvious</h3>
-                    <p>A quality chef's knife costs $100–$400. Professional sharpening extends its useful life by years and makes every session at the cutting board a genuine pleasure. The math is simple — regular professional maintenance costs far less than replacement, and the performance difference is felt with every single cut.</p>
+                    <p>A quality chef's knife costs $100–$400. Professional sharpening extends its useful life by years and makes every session at the cutting board a genuine pleasure. The math is simple — regular maintenance costs far less than replacement.</p>
                 `
             },
         ],
@@ -1013,7 +1070,7 @@ function knifeWiki() {
                 ]
             },
             {
-                question: "How much force do you apply when cutting through, say, a carrot or onion?",
+                question: "How much force do you apply when cutting through a carrot or onion?",
                 options: [
                     { text: "The knife glides — barely any force needed", score: 0 },
                     { text: "Normal light pressure", score: 1 },
@@ -1033,54 +1090,14 @@ function knifeWiki() {
         ],
 
         anatomyParts: {
-            tip: {
-                name: 'Tip',
-                emoji: '🎯',
-                description: 'The pointed end of the blade. Used for precision work — scoring meat, piercing, segmenting citrus, and fine detail cuts. An intact, sharp tip is essential for controlled knife work.',
-                tip: 'The tip is the most fragile part of the blade. Never use it as a lever, and store knives in a way that protects the tip from contact. Dropped point-first, even briefly, can damage or snap the tip.'
-            },
-            edge: {
-                name: 'Edge',
-                emoji: '⚡',
-                description: 'The sharpened cutting surface — where all the work happens. The geometry, angle, and finish of the edge determine everything about how the knife performs.',
-                tip: 'The edge angle is set during sharpening. Japanese edges (15°) are thinner and sharper but more fragile. Western edges (20–22°) are more durable and forgiving. Using a knife at the correct angle for its design maximizes both performance and longevity.'
-            },
-            belly: {
-                name: 'Belly',
-                emoji: '🌙',
-                description: 'The curved section of the edge between the heel and tip. The curve enables the rocking motion used for mincing and continuous chopping without lifting the blade fully off the board.',
-                tip: 'German-style knives have more pronounced belly curve than Japanese-style, making them better for rocking cuts. Japanese knives are flatter — designed for the forward push cut preferred in Japanese technique.'
-            },
-            heel: {
-                name: 'Heel',
-                emoji: '💪',
-                description: 'The rear portion of the cutting edge, nearest the handle. The thickest and strongest section of the edge — used for heavy chopping, hard vegetables like butternut squash, and dense proteins.',
-                tip: 'Most cutting force should be applied at the heel, not the tip. The heel can absorb impact; the tip cannot. When using a cleaver-style stroke or breaking down tough ingredients, work near the heel.'
-            },
-            spine: {
-                name: 'Spine',
-                emoji: '📏',
-                description: 'The thick, unsharpened back of the blade. Provides structural rigidity. Thicker spines mean more weight and durability; thinner spines mean a lighter, more nimble knife.',
-                tip: 'You can use the spine to scrape ingredients off a cutting board — but never the edge. Scraping with the edge immediately dulls it by folding the apex. Always scrape with the spine (back of blade) or a bench scraper.'
-            },
-            bolster: {
-                name: 'Bolster',
-                emoji: '🔩',
-                description: 'The thick metal collar between blade and handle, found primarily on Western/German knives. Provides balance, protects fingers from slipping onto the blade, and adds heft.',
-                tip: 'A full bolster that covers the heel can prevent sharpening that last inch of the blade. Over time, the heel becomes noticeably duller than the rest. Some knives have a half-bolster specifically to allow the full edge to be sharpened.'
-            },
-            handle: {
-                name: 'Handle',
-                emoji: '✋',
-                description: 'The grip, made from wood, composite, G-10, Micarta, or synthetic materials. Handle material affects comfort, grip in wet conditions, maintenance requirements, and hygiene.',
-                tip: 'Wood handles are beautiful but require occasional oiling and should never go in the dishwasher. Synthetic handles (G-10, Micarta) are nearly indestructible and dishwasher-safe. A full-tang knife (metal extending the full length of the handle) is stronger and more balanced than a partial-tang.'
-            },
-            blade: {
-                name: 'Blade',
-                emoji: '🔪',
-                description: 'The entire metal portion of the knife — tip, edge, belly, heel, and spine combined. The steel alloy and heat treatment determine hardness, edge retention, corrosion resistance, and how the knife sharpens.',
-                tip: 'Blade width varies by style. Western blades are generally wider and heavier. Japanese blades tend to be thinner and lighter, allowing for more precise cuts but requiring more careful handling.'
-            },
+            tip:     { name: 'Tip',     emoji: '🎯', description: 'The pointed end of the blade. Used for precision work — scoring meat, piercing, segmenting citrus, and fine detail cuts. An intact, sharp tip is essential for controlled knife work.', tip: 'The tip is the most fragile part of the blade. Never use it as a lever, and store knives in a way that protects the tip from contact. Dropped point-first, even briefly, can damage or snap the tip.' },
+            edge:    { name: 'Edge',    emoji: '⚡', description: 'The sharpened cutting surface — where all the work happens. The geometry, angle, and finish of the edge determine everything about how the knife performs.', tip: 'The edge angle is set during sharpening. Japanese edges (15°) are thinner and sharper but more fragile. Western edges (20–22°) are more durable and forgiving.' },
+            belly:   { name: 'Belly',   emoji: '🌙', description: 'The curved section of the edge between the heel and tip. The curve enables the rocking motion used for mincing and continuous chopping without lifting the blade fully off the board.', tip: 'German-style knives have more pronounced belly curve, making them better for rocking cuts. Japanese knives are flatter — designed for the forward push cut preferred in Japanese technique.' },
+            heel:    { name: 'Heel',    emoji: '💪', description: 'The rear portion of the cutting edge, nearest the handle. The thickest and strongest section of the edge — used for heavy chopping, hard vegetables like butternut squash, and dense proteins.', tip: 'Most cutting force should be applied at the heel, not the tip. The heel can absorb impact; the tip cannot.' },
+            spine:   { name: 'Spine',   emoji: '📏', description: 'The thick, unsharpened back of the blade. Provides structural rigidity. Thicker spines mean more weight and durability; thinner spines mean a lighter, more nimble knife.', tip: 'You can use the spine to scrape ingredients off a cutting board — but never the edge. Scraping with the edge immediately dulls it by folding the apex.' },
+            bolster: { name: 'Bolster', emoji: '🔩', description: 'The thick metal collar between blade and handle, found primarily on Western/German knives. Provides balance, protects fingers from slipping onto the blade, and adds heft.', tip: 'A full bolster that covers the heel can prevent sharpening that last inch of the blade. Over time, the heel becomes noticeably duller than the rest. Some knives have a half-bolster to allow the full edge to be sharpened.' },
+            handle:  { name: 'Handle',  emoji: '✋', description: 'The grip, made from wood, composite, G-10, Micarta, or synthetic materials. Handle material affects comfort, grip in wet conditions, maintenance requirements, and hygiene.', tip: 'Wood handles are beautiful but require occasional oiling and should never go in the dishwasher. Synthetic handles (G-10, Micarta) are nearly indestructible and dishwasher-safe.' },
+            blade:   { name: 'Blade',   emoji: '🔪', description: 'The entire metal portion of the knife — tip, edge, belly, heel, and spine combined. The steel alloy and heat treatment determine hardness, edge retention, corrosion resistance, and how the knife sharpens.', tip: 'Blade width varies by style. Western blades are generally wider and heavier. Japanese blades tend to be thinner and lighter, allowing for more precise cuts but requiring more careful handling.' },
         },
 
         quickFaqs: [
@@ -1089,25 +1106,25 @@ function knifeWiki() {
             { q: "Can a badly chipped or damaged knife be fixed?", a: "Most damage is repairable — chips, rolled edges, reprofiling a damaged bevel. Severely broken tips or cracked blades may not be fully restorable, but we'll give you an honest assessment before doing any work." },
             { q: "Is it worth sharpening a cheap knife?", a: "Usually yes. A sharp inexpensive knife outperforms a dull expensive one for most tasks. That said, very low-grade steel won't hold an edge as long between sharpenings." },
             { q: "What's the difference between honing and sharpening?", a: "Honing realigns the edge without removing metal (daily maintenance). Sharpening removes metal to create a fresh edge (periodic repair). Both are necessary for optimal performance." },
-            { q: "How long does professional sharpening take?", a: "Most knives are ready within 24 hours. We also offer same-day service when you need it quickly." },
+            { q: "How long does professional sharpening take?", a: "Most knives are ready within 24 hours. We also offer same-day service when scheduling allows." },
         ],
 
         allFaqs: [
-            { q: "How often should I get my knives professionally sharpened?", a: "For most home cooks using knives daily, 1–2 professional sharpenings per year is ideal. Between appointments, maintain with a honing rod before each cooking session. Professional cooks or those who use knives heavily may benefit from quarterly service." },
+            { q: "How often should I get my knives professionally sharpened?", a: "For most home cooks using knives daily, 1–2 professional sharpenings per year is ideal. Between appointments, maintain with a honing rod before each cooking session. Professional cooks who use knives heavily may benefit from quarterly service." },
             { q: "What types of knives do you sharpen?", a: "We sharpen chef's knives, paring knives, santoku, fillet, boning, bread/serrated, cleavers, and most specialty kitchen knives. We also handle outdoor knives and hunting blades. Ceramic knives require specialized diamond equipment — ask us about availability for your specific knife." },
             { q: "Can a badly damaged or chipped knife be restored?", a: "Most damage is fully repairable — including significant chips, rolled edges, bent tips (carefully), and re-profiling a knife that was sharpened at an incorrect angle over the years. Severely broken tips or cracked steel may be beyond repair, but we'll give you an honest assessment before we touch anything." },
-            { q: "Is it worth professionally sharpening an inexpensive knife?", a: "Almost always yes. A sharp inexpensive knife outperforms a dull expensive one for most everyday cutting tasks. The exception: extremely low-grade steel that won't hold a refined edge for more than a few uses. We can tell you where your knife falls after inspection." },
+            { q: "Is it worth professionally sharpening an inexpensive knife?", a: "Almost always yes. A sharp inexpensive knife outperforms a dull expensive one for most everyday cutting tasks. The exception: extremely low-grade steel that won't hold a refined edge for more than a few uses." },
             { q: "What's the difference between honing and sharpening?", a: "Honing uses a smooth rod to realign the microscopic edge without removing metal — it's maintenance you should do before every cooking session. Sharpening uses abrasives to remove metal and create a fresh edge — it's repair you need periodically when honing no longer restores performance." },
             { q: "How do I know when honing isn't enough and I need sharpening?", a: "When your knife fails the tomato test (can't slice without pressing) even right after honing, it's time for sharpening. Honing maintains a sharp edge; it can't restore a dull one." },
             { q: "What angle do you sharpen at?", a: "We sharpen to the correct factory specification for each knife — typically 15–17° per side for Japanese-style blades and 18–22° per side for Western/German knives. We can also discuss custom angles for specific use cases." },
-            { q: "Do I need to bring my knives in, or do you come to me?", a: "We offer in-shop service at our location and periodic mobile service events. Check our website for the latest schedule and any current drop-off options." },
+            { q: "Do I need to bring my knives in, or do you come to me?", a: "We offer in-shop service at our Maple Grove location and periodic mobile service events. Check our website for the latest schedule and any current drop-off options." },
             { q: "How long does professional sharpening take?", a: "Most knives are completed and ready within 24 hours. We offer same-day service when scheduling allows — call ahead or book online to confirm availability." },
-            { q: "My knife has a Damascus pattern — does that affect sharpening?", a: "The Damascus pattern is on the cladding steel, not the core cutting edge. Sharpening is done on the core steel and its angle — the pattern isn't affected by the sharpening process." },
-            { q: "Why does my knife go dull so fast even after professional sharpening?", a: "Fast dulling usually comes down to cutting surface (glass, ceramic, marble boards will destroy an edge), storage (loose in a drawer = micro-chips), or dishwasher use. Fix those habits and your knife will stay sharp dramatically longer." },
+            { q: "My knife has a Damascus pattern — does that affect sharpening?", a: "The Damascus pattern is on the cladding steel, not the core cutting edge. Sharpening is done on the core steel and its angle — the beautiful swirl pattern isn't affected by the sharpening process." },
+            { q: "Why does my knife go dull so fast even after professional sharpening?", a: "Fast dulling usually comes down to cutting surface (glass, ceramic, marble boards destroy an edge), storage (loose in a drawer = micro-chips from rattling), or dishwasher use. Fix those habits and your knife will stay sharp dramatically longer." },
             { q: "What's the best way to maintain my knife between professional sharpenings?", a: "Hone with a smooth steel rod before each use, hand wash and dry immediately after use, store on a magnetic strip or in a proper knife block, and always use a wood or polypropylene cutting board. These habits extend professional sharpening results for months." },
         ],
 
-        // ── COMPUTED ────────────────────────────────────────────────────────────
+        // ── Computed ─────────────────────────────────────────────────────────
 
         get filteredArticles() {
             let list = this.articles;
@@ -1132,11 +1149,9 @@ function knifeWiki() {
                 .slice(0, 2);
         },
 
-        // ── METHODS ─────────────────────────────────────────────────────────────
+        // ── Methods ──────────────────────────────────────────────────────────
 
-        init() {
-            this.$nextTick(() => lucide.createIcons());
-        },
+        init() { this.$nextTick(() => lucide.createIcons()); },
 
         setView(v) {
             this.view = v;
@@ -1145,8 +1160,7 @@ function knifeWiki() {
         },
 
         filterByCategory(id) {
-            this.activeCategory = id;
-            this.searchQuery = '';
+            this.activeCategory = id; this.searchQuery = '';
             this.$nextTick(() => lucide.createIcons());
         },
 
@@ -1155,89 +1169,42 @@ function knifeWiki() {
             this.$nextTick(() => lucide.createIcons());
         },
 
-        openArticle(article) {
-            this.currentArticle = article;
-            this.setView('article');
-        },
+        openArticle(article) { this.currentArticle = article; this.setView('article'); },
 
-        getCategoryColor(id) {
-            return this.categories.find(c => c.id === id)?.color || '#C9A84C';
-        },
-
-        getCategoryLabel(id) {
-            return this.categories.find(c => c.id === id)?.label || id;
-        },
+        getCategoryColor(id) { return this.categories.find(c => c.id === id)?.color || '#C6925B'; },
+        getCategoryLabel(id) { return this.categories.find(c => c.id === id)?.label || id; },
 
         startQuiz() {
-            this.quizStarted = true;
-            this.quizStep = 1;
-            this.quizScore = 0;
+            this.quizStarted = true; this.quizStep = 1; this.quizScore = 0;
             this.$nextTick(() => lucide.createIcons());
         },
 
         answerQuiz(score) {
             this.quizScore += score;
-            if (this.quizStep < this.quizQuestions.length) {
-                this.quizStep++;
-            } else {
-                this.finishQuiz();
-            }
+            if (this.quizStep < this.quizQuestions.length) { this.quizStep++; }
+            else { this.finishQuiz(); }
         },
 
         finishQuiz() {
             this.quizComplete = true;
-            const maxScore = this.quizQuestions.length * 3; // 15
-            const pct = (this.quizScore / maxScore) * 100;
+            const pct = (this.quizScore / (this.quizQuestions.length * 3)) * 100;
             const sharpScore = Math.round(100 - pct);
             const barPct = Math.min(Math.max(pct, 5), 95);
-
             if (pct <= 20) {
-                this.quizResult = {
-                    emoji: '🏆',
-                    title: 'Your Knife Is Razor Sharp!',
-                    description: "Impressive! You clearly know how to care for a blade. Your knife is in excellent condition — keep up those habits.",
-                    sharpScore, barPct,
-                    needsBooking: false,
-                    cta: "Even perfectly maintained knives benefit from an annual professional tune-up to restore perfect geometry. Consider booking your next one now."
-                };
+                this.quizResult = { emoji: '🏆', title: 'Your Knife Is Razor Sharp!', description: "Impressive! You clearly know how to care for a blade. Your knife is in excellent condition.", sharpScore, barPct, needsBooking: false, cta: "Even perfectly maintained knives benefit from an annual professional tune-up to restore perfect geometry." };
             } else if (pct <= 45) {
-                this.quizResult = {
-                    emoji: '✅',
-                    title: 'Pretty Good — But It Could Be Better',
-                    description: "Your knife is functional but showing clear signs of wear. Some improved habits and a professional service will get it back to peak performance.",
-                    sharpScore, barPct,
-                    needsBooking: false,
-                    cta: "Schedule a professional sharpening to restore the edge geometry, then maintain with daily honing. You'll notice the difference immediately."
-                };
+                this.quizResult = { emoji: '✅', title: 'Pretty Good — But It Could Be Better', description: "Your knife is functional but showing clear signs of wear. A professional service will get it back to peak performance.", sharpScore, barPct, needsBooking: false, cta: "Schedule a professional sharpening to restore the edge geometry, then maintain with daily honing. You'll notice the difference immediately." };
             } else if (pct <= 65) {
-                this.quizResult = {
-                    emoji: '⚠️',
-                    title: 'Your Knife Needs Attention',
-                    description: "Your knife is noticeably dull. Honing alone won't fix this — you need actual metal removal to restore a proper edge. Time for professional service.",
-                    sharpScore, barPct,
-                    needsBooking: true,
-                    cta: "Book a sharpening appointment and get your knife back to cutting-edge performance. You'll wonder how you cooked with it this way."
-                };
+                this.quizResult = { emoji: '⚠️', title: 'Your Knife Needs Attention', description: "Your knife is noticeably dull. Honing alone won't fix this — you need actual metal removal to restore a proper edge.", sharpScore, barPct, needsBooking: true, cta: "Book a sharpening appointment and get your knife back to cutting-edge performance." };
             } else {
-                this.quizResult = {
-                    emoji: '🆘',
-                    title: 'Your Knife Is Dangerously Dull',
-                    description: "A dull knife is a dangerous knife — it requires excessive force and is far more likely to slip. This blade needs immediate professional attention.",
-                    sharpScore, barPct,
-                    needsBooking: true,
-                    cta: "Don't wait on this one. A severely dull knife is a real safety hazard in the kitchen. Book today and we'll have it razor-sharp for you."
-                };
+                this.quizResult = { emoji: '🆘', title: 'Your Knife Is Dangerously Dull', description: "A dull knife is a dangerous knife — it requires excessive force and is far more likely to slip. This blade needs immediate professional attention.", sharpScore, barPct, needsBooking: true, cta: "Don't wait on this one. A severely dull knife is a real safety hazard. Book today and we'll have it razor-sharp for you." };
             }
-
             this.$nextTick(() => lucide.createIcons());
         },
 
         resetQuiz() {
-            this.quizStarted = false;
-            this.quizComplete = false;
-            this.quizStep = 1;
-            this.quizScore = 0;
-            this.quizResult = null;
+            this.quizStarted = false; this.quizComplete = false;
+            this.quizStep = 1; this.quizScore = 0; this.quizResult = null;
         },
 
         setAnatomyPart(part) {
@@ -1245,38 +1212,13 @@ function knifeWiki() {
             this.$nextTick(() => lucide.createIcons());
         },
 
-        toggleFaq(idx) {
-            this.openFaq = this.openFaq === idx ? null : idx;
-            this.$nextTick(() => lucide.createIcons());
-        },
-
         getAngleInfo(angle) {
             const a = parseInt(angle);
-            if (a <= 12) return {
-                type: 'Traditional Japanese (10–12°)',
-                examples: 'Yanagiba, usuba, sushi knives',
-                note: 'Ultra-thin, whisper-sharp edge — fragile, requires wood boards only'
-            };
-            if (a <= 16) return {
-                type: 'Modern Japanese (13–16°)',
-                examples: 'Shun, Global, Mac, Miyabi',
-                note: 'Very sharp with improved durability vs. traditional Japanese angles'
-            };
-            if (a <= 20) return {
-                type: 'Mid-Range Japanese / Western Hybrid (17–20°)',
-                examples: 'Many premium Western knives, versatile Japanese blades',
-                note: 'Excellent balance of sharpness and edge durability for daily use'
-            };
-            if (a <= 25) return {
-                type: 'Western / German (21–25°)',
-                examples: 'Wüsthof, Henckels, most Western chef\'s knives',
-                note: 'Durable, chip-resistant — ideal for varied kitchen tasks and less delicate use'
-            };
-            return {
-                type: 'Heavy-Duty / Outdoor (26–30°)',
-                examples: 'Cleavers, hunting knives, survival blades',
-                note: 'Maximum durability over maximum sharpness — designed for tough conditions'
-            };
+            if (a <= 12) return { type: 'Traditional Japanese (10–12°)', examples: 'Yanagiba, usuba, sushi knives', note: 'Ultra-thin, whisper-sharp — fragile, requires wood boards only' };
+            if (a <= 16) return { type: 'Modern Japanese (13–16°)', examples: 'Shun, Global, Mac, Miyabi', note: 'Very sharp with improved durability vs. traditional Japanese angles' };
+            if (a <= 20) return { type: 'Mid-Range / Hybrid (17–20°)', examples: 'Many premium Western knives, versatile Japanese blades', note: 'Excellent balance of sharpness and edge durability for daily use' };
+            if (a <= 25) return { type: 'Western / German (21–25°)', examples: 'Wüsthof, Henckels, most Western chef\'s knives', note: 'Durable, chip-resistant — ideal for varied kitchen tasks' };
+            return { type: 'Heavy-Duty / Outdoor (26–30°)', examples: 'Cleavers, hunting knives, survival blades', note: 'Maximum durability over maximum sharpness — designed for tough conditions' };
         },
     };
 }
